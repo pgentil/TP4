@@ -9,4 +9,6 @@ plt.plot(y, 800 * np.cos(y))
 plt.plot(z, np.tan(z))
 plt.show()
 
+def 
+
 
