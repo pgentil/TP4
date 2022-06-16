@@ -7,7 +7,7 @@ With it, standard midi files can be converted to the type of music score that th
 @institution Universidad de San Andrés
 @date 2022-06-09 Thu 16:30:58 -0300
 """
-from notes import notes_mapping
+from sintethizer.music_sheet.notes import notes_mapping
 
 import argparse
 import math
