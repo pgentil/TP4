@@ -1,26 +1,26 @@
-### TP4
+# TP4
 ## Objetivos:
-- # Configuracion de instrumento:
+- ### Configuracion de instrumento:
     - Onda fundamental e intensidad
     - Ondas armonicas e intensidades
     - Funciones y parametros
     - Funciones para leer archivos y sacar la informacion de la configracion del instrumento
-- # Funciones de Ataque, Sostenimiento y Decaimiento:
+- ### Funciones de Ataque, Sostenimiento y Decaimiento:
     - Clases de cada una con sus funciones
-- # Suma de sinoidales:
+- ### Suma de sinoidales:
     - Hacer una funcion para sumar la fundamental con las armonicas y sacar la sinoidal de cada nota
-- # Testing:
+- ### Testing:
     - Usando framework unittest hacer Test Cases y Suits. Leer [documentacion](https://docs.python.org/3/library/unittest.html).
-- # Crear partituras:
+- ### Crear partituras:
     - Saber como se usa el programa dado por los profesores para pasar de archivos midi a una partitura con las notas. 
-- # Pywave:
+- ### Pywave:
     - Saber como se usa el modulo pywave para poder pasar de un archivo python a un archivo .wav para reproducir sonido. Leer [documentacion](https://github.com/Zuzu-Typ/PyWave)
     - Tambien como pasar de la configuracion de la onda sinoidal y del instrumento al sonido. 
-- # Configurar programa con parametros:
+- ### Configurar programa con parametros:
     - Usando argparse configurar programa para tener opciones de parametrizar el instrumento posterior a que empieze el programa. 
     - Sirve para pasarle la partitura, la frecuencia, etc. 
     - Leer [documentacion](https://docs.python.org/3/library/argparse.html)
-- # Ordenar proyecto como paquete de python:
+- ### Ordenar proyecto como paquete de python:
     - Ordenar el proyecto como un paquete de python para ser mas accesible para la correccion (recomendado por Alvaro). 
     - Poner un archivo setup.py y requirements.py 
     - Ver repos de otros proyectos
