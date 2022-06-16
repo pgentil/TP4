@@ -3,7 +3,7 @@ import sys
 sys.path.append('../')
 
 import unittest
-import asdbis
+import .ASD_functions.asdbis as asdbis
 import numpy as np
 
 
