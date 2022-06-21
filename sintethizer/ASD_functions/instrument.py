@@ -21,7 +21,7 @@ def get_func(param: list, duration, fs):
             func.QUARTSIN(param[1], duration, fs)
         elif param[0] == 'HALFCOS':
             func.HALFCOS(param[1], duration, fs)
-        elif param[0] == 'HALFISN':
+        elif param[0] == 'HALFSIN':
             func.HALFSIN(param[1], duration, fs)
         elif param[0] == 'LOG':
             func.LOG(param[1], duration, fs)

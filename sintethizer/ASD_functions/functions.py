@@ -1,3 +1,4 @@
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 import math
@@ -134,16 +135,25 @@ class Function():
                 index += 1
         return values
 
-    def PULSES(self, t0, t1, a1, duration, frec):
+    def PULSES(self, t0, t1, a1, duration, frec): ##NO FUNCIONA
         sample = np.arange(0, duration + 1/frec, 1/frec)
         values = np.zeros(len(sample))
+        print(values)
         index = 0
         for t in sample:
             tz = (t / t0) - math.floor(t / t0)
+            print(tz)
             values[index] = min(abs(((1 - a1) / t1) * (tz - t0 + t1)) + a1)
+            print (values)
             index += 1
         return values
 
 
 if __name__ == "__main__":
     function1 = Function()
+    result = function1.EXP(0.02, 50, 1)
+    print(result)
+    x = np.linspace(0, 20, 100)
+    plt.plot(x, result)
+    plt.show()
+    
