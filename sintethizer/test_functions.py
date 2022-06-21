@@ -1,7 +1,7 @@
 #Testing python file - pytest
 import unittest
 
-import ASD_functions.atsude as asdbis
+import ASD_functions.functions as functions
 
 import numpy as np
 
@@ -9,11 +9,11 @@ import numpy as np
 class TestFunctions(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.function = asdbis.Function()
+        self.function = functions.Function()
 
     def test_LINEAR(self):
-        array = np.array([2, 4, 6, 8])
-        self.assertEqual(self.function.LINEAR((0.5), 4, 4), array)
+        array = np.arange(0, 120.5, 0.5)
+        self.assertEqual(self.function.LINEAR(0.5, 60, 4), array)
         pass
 
     def test_EXP(self):
