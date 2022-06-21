@@ -14,9 +14,7 @@ class TestFunctions(unittest.TestCase):
     def test_LINEAR(self):
         array = np.arange(0, 6, 1.)
         result = self.function.LINEAR(1, 5, 1)
-        print(f"array: {array}")
-        print(f"result: {result}")
-        self.assertTrue(np.allclose(self.function.LINEAR(1, 5, 1), array))
+        self.assertTrue(np.allclose(result, array))
         pass
 
     def test_EXP(self):
