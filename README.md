@@ -9,6 +9,7 @@
     - Clases de cada una con sus funciones
 - ### Suma de sinoidales:
     - Hacer una funcion para sumar la fundamental con las armonicas y sacar la sinoidal de cada nota
+    - Funcion adentro de la clase de intrumentos
 - ### Testing:
     - Usando framework unittest hacer Test Cases y Suits. Leer [documentacion](https://docs.python.org/3/library/unittest.html).
 - ### Crear partituras:
