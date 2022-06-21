@@ -3,36 +3,36 @@ import matplotlib.pyplot as plt
 from functions import Function
 
 
-def get_func(param: list, duration, fs, use):
+def get_func(param: list, duration, fs):
         func = Function()
         if param[0] == 'CONSTANT':
-            func.CONSTANT(duration, fs, use)
+            func.CONSTANT(duration, fs)
         elif param[0] == 'LINEAR':
-            func.LINEAR(param[1], duration, fs, use)
+            func.LINEAR(param[1], duration, fs)
         elif param[0] == 'INVLINEAR':
-            func.INVLINEAR(param[1], duration, fs, use)
+            func.INVLINEAR(param[1], duration, fs)
         elif param[0] == 'EXP':
-            func.EXP(param[1], duration, fs, use)
+            func.EXP(param[1], duration, fs)
         elif param[0] == 'INVEXP':
-            func.INVEXP(param[1], duration, fs, use)
+            func.INVEXP(param[1], duration, fs)
         elif param[0] == 'QUARTCOS':
-            func.QUARTCOS(param[1], duration, fs, use)
+            func.QUARTCOS(param[1], duration, fs)
         elif param[0] == 'QUARTSIN':
-            func.QUARTSIN(param[1], duration, fs, use)
+            func.QUARTSIN(param[1], duration, fs)
         elif param[0] == 'HALFCOS':
-            func.HALFCOS(param[1], duration, fs, use)
+            func.HALFCOS(param[1], duration, fs)
         elif param[0] == 'HALFISN':
-            func.HALFSIN(param[1], duration, fs, use)
+            func.HALFSIN(param[1], duration, fs)
         elif param[0] == 'LOG':
-            func.LOG(param[1], duration, fs, use)
+            func.LOG(param[1], duration, fs)
         elif param[0] == 'INVLOG':
-            func.INVLOG(param[1], duration, fs, use)
+            func.INVLOG(param[1], duration, fs)
         elif param[0] == 'SIN':
-            func.SIN(param[1], param[2], duration, fs, use)
+            func.SIN(param[1], param[2], duration, fs)
         elif param[0] == 'TRI':
-            func.TRI(param[1], param[2], param[3], duration, fs, use)
+            func.TRI(param[1], param[2], param[3], duration, fs)
         elif param[0] == 'PULSES':
-            func.PULSES(param[1], param[2], param[3], duration, fs, use)
+            func.PULSES(param[1], param[2], param[3], duration, fs)
         else:
             raise AssertionError('The given function is non-existant.')
         return func

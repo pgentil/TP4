@@ -12,8 +12,11 @@ class TestFunctions(unittest.TestCase):
         self.function = functions.Function()
 
     def test_LINEAR(self):
-        array = np.arange(0, 120.5, 0.5)
-        self.assertEqual(self.function.LINEAR(0.5, 60, 4), array)
+        array = np.arange(0, 6, 1.)
+        result = self.function.LINEAR(1, 5, 1)
+        print(f"array: {array}")
+        print(f"result: {result}")
+        self.assertTrue(np.allclose(self.function.LINEAR(1, 5, 1), array))
         pass
 
     def test_EXP(self):
