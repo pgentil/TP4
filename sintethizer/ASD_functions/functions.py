@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from asdbis import Function
+from atsude import Function
 
 
 def get_func(param: list, duration, fs, use):

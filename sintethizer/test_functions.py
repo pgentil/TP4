@@ -1,7 +1,7 @@
 #Testing python file - pytest
 import unittest
 
-import ASD_functions.asdbis as asdbis
+import ASD_functions.atsude as asdbis
 
 import numpy as np
 
@@ -13,7 +13,7 @@ class TestFunctions(unittest.TestCase):
 
     def test_LINEAR(self):
         array = np.array([2, 4, 6, 8])
-        self.assertEqual(self.function.LINEAR(2, 4, 4), array)
+        self.assertEqual(self.function.LINEAR((0.5), 4, 4), array)
         pass
 
     def test_EXP(self):
