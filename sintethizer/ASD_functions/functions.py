@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 pi = np.pi
 
@@ -16,104 +17,133 @@ class Function():
     def LINEAR(self, t0, duration, frec):
         sample = np.arange(0, duration + 1/frec, 1/frec)
         values = np.zeros(len(sample))
-        print(sample)
         index = 0
         for t in sample:
-            print (t)
-            print(values[index])
             values[index] = t / t0
             index += 1
-            print(index)
-            print(t/t0)
         return values
         
     def EXP(self, t0, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = np.exp(5 * (t - t0) / t0)
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = np.exp(5 * (t - t0) / t0)
+            index += 1
         return values
 
     def QUARTSIN(self, t0, duration, frec):
-        values = np.zeros(0, duration, frec)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = np.sin((pi * t) / (2 * t0))
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = np.sin((pi * t) / (2 * t0))
+            index += 1
         return values
 
     def HALFSIN(self, t0, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = (1 + np.cos(pi * (t / t0 - 0.5))) / 2
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = (1 + np.cos(pi * (t / t0 - 0.5))) / 2
+            index += 1
         return values
 
     def LOG(self, t0, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = np.log10(9 * t / t0 + 1)
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = np.log10(9 * t / t0 + 1)
+            index += 1
         return values
 
     def TRI(self, t0, t1, a1, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
             if t < t1:
-                values[t] = t * a1 / t1
+                values[index] = t * a1 / t1
+                index += 1
             elif t > t1:
-                values[t] = (t - t1) / (t1 - t0)
+                values[index] = (t - t1) / (t1 - t0)
+                index += 1
         return values
 
     def CONSTANT(self, duration, frec):
-        return np.ones(duration)
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        return np.ones(len(sample))
 
     def INVLINEAR(self, t0, duration, frec: str):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = (max(1 - (t / t0)))
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = (max(1 - (t / t0)))
+            index += 1
+        return values
 
     def SIN(self, a, f, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = 1 + (a * np.sin(f * t))
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = 1 + (a * np.sin(f * t))
+            index += 1
+        return values
 
     def INVEXP(self, t0, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = np.exp((-5 * t) / t0)
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = np.exp((-5 * t) / t0)
+            index += 1
         return values
 
     def QUARTCOS(self, t0, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = np.cos((pi * t) / (2 * t0))
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = np.cos((pi * t) / (2 * t0))
+            index += 1
         return values
 
     def HALFCOS(self, t0, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
-            values[t] = (1 + np.cos(pi * t / t0)) / 2
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            values[index] = (1 + np.cos(pi * t / t0)) / 2
+            index += 1
         return values
 
     def INVLOG(self, t0, duration, frec):
-        
-        values = np.zeros(duration)
-        for t in np.arange(0, duration, 1/frec):
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
             if t < t0:
-                values[t] = np.log10((-9 * t) / t0 + 10)
+                values[index] = np.log10((-9 * t) / t0 + 10)
+                index += 1
             else:
-                values[t] = 0
+                values[index] = 0
+                index += 1
         return values
 
     def PULSES(self, t0, t1, a1, duration, frec):
-        return NotImplementedError
+        sample = np.arange(0, duration + 1/frec, 1/frec)
+        values = np.zeros(len(sample))
+        index = 0
+        for t in sample:
+            tz = (t / t0) - math.floor(t / t0)
+            values[index] = min(abs(((1 - a1) / t1) * (tz - t0 + t1)) + a1)
+            index += 1
+        return values
 
 
 if __name__ == "__main__":
     function1 = Function()
-    print(function1.LINEAR(0.5, 60, 4))
