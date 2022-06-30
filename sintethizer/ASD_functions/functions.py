@@ -9,7 +9,7 @@ class Function():
     
     def LINEAR(self, t0, array):
         note = np.zeros(len(array))
-        for t in len(array):
+        for t in range(len(array)):
             result = array[t] / t0
             if result < 1:
                 note[t] = result
@@ -19,13 +19,9 @@ class Function():
         
     def EXP(self, t0, array):
         note = np.zeros(len(array))
-        for t in len(array):
-            result = np.exp(5 * (array[t] - t0) / t0)
-            if result < 1:
-                note[t] = result
-            else:
-                note[t] = 1
-                return note
+        for t in range(len(array)):
+            note[t] = np.exp(5 * (array[t] - t0) / t0)
+        return note
 
     def QUARTSIN(self, t0, array):
         note = np.zeros(len(array))
