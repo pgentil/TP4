@@ -15,12 +15,12 @@ def main():
     function = Function()
 
     attack = function.EXP(duration_attack, array_a)
-    sustain = function.CONSTANT(duration_sustain, array_s)
+    sustain = function.CONSTANT(array_s)
     decay = function.INVLINEAR(duration_decay, array_d)
-    
-    plt.plot(array, attack)
-    plt.plot(array, sustain)
-    plt.plot(array, decay)
+
+    plt.plot(array_a, attack)
+    plt.plot(array_s, sustain)
+    plt.plot(array_d, decay)
     plt.show()
 
 if __name__ == "__main__":
