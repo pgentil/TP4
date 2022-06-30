@@ -6,7 +6,8 @@
     - Funciones y parametros
     - Funciones para leer archivos y sacar la informacion de la configracion del instrumento
 - ### Funciones de Ataque, Sostenimiento y Decaimiento:
-    - Clases de cada una con sus funciones
+    - Clase general de funciones
+    - programa que lee documento y usa la informacion de cada uno de los paramteros para hacer arrays y etc
 - ### Suma de sinoidales:
     - Hacer una funcion para sumar la fundamental con las armonicas y sacar la sinoidal de cada nota
     - Funcion adentro de la clase de intrumentos
