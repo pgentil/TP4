@@ -10,12 +10,8 @@ class Function():
     def LINEAR(self, t0, array):
         note = np.zeros(len(array))
         for t in range(len(array)):
-            result = array[t] / t0
-            if result < 1:
-                note[t] = result
-            else:
-                note[t] = 1
-                return note
+            note = array[t] / t0
+        return note
         
     def EXP(self, t0, array):
         note = np.zeros(len(array))
@@ -25,33 +21,21 @@ class Function():
 
     def QUARTSIN(self, t0, array):
         note = np.zeros(len(array))
-        for t in len(array):
-            result = np.sin((pi * array[t]) / (2 * t0))
-            if result < 1:
-                note[t] = result
-            else:
-                note[t] = 1
-                return note
+        for t in range(len(array)):
+            note[t] = np.sin((pi * array[t]) / (2 * t0))
+        return note
 
     def HALFSIN(self, t0, array):
         note = np.zeros(len(array))
         for t in len(array):
-            result = (1 + np.cos(pi * (array[t] / t0 - 0.5))) / 2
-            if result < 1:
-                note[t] = result
-            else:
-                note[t] = 1
-                return note
+            note[t] = (1 + np.cos(pi * (array[t] / t0 - 0.5))) / 2
+        return note
 
     def LOG(self, t0, array):
         note = np.zeros(len(array))
         for t in len(array):
-            result = np.log10(9 * array[t] / t0 + 1)
-            if result < 1:
-                note[t] = result
-            else:
-                note[t] = 1
-                return note
+            note[t] = np.log10(9 * array[t] / t0 + 1)
+        return note
 
     def TRI(self, t0, t1, a1, duration, frec):
         sample = np.arange(0, duration + 1/frec, 1/frec)
