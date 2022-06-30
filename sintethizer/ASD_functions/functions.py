@@ -16,7 +16,7 @@ class Function():
         return f"ATTACK: {self.attack}\nSUSTAIN: {self.sustain}\nDECAY: {self.decay}"
         
     def LINEAR(self, t0, duration, frec):
-        sample = np.arange(0, duration + 1/frec, 1/frec)
+        sample = np.linspace(0, duration, frec)
         values = np.zeros(len(sample))
         index = 0
         for t in sample:
@@ -25,7 +25,8 @@ class Function():
         return values
         
     def EXP(self, t0, duration, frec):
-        sample = np.arange(0, duration + 1/frec, 1/frec)
+        sample = np.linspace(0, duration, frec)
+        print (sample)
         values = np.zeros(len(sample))
         index = 0
         for t in sample:
@@ -148,12 +149,22 @@ class Function():
             index += 1
         return values
 
+        
+
 
 if __name__ == "__main__":
     function1 = Function()
-    result = function1.EXP(0.02, 50, 1)
+
+    result = function1.EXP(2, 0.02, 50)
     print(result)
-    x = np.linspace(0, 20, 100)
+    x = np.linspace(0, 0.02, 50)
     plt.plot(x, result)
     plt.show()
+
+    def liner(array, t0):
+        result = np.zeros(len(array))
+        for t in len(array):
+            result[t] = array[t] * (1/t0)
+        return result
+            
     
