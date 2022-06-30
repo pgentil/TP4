@@ -7,59 +7,55 @@ pi = np.pi
 
 class Function():
     
-    def __init__(self):
-        self.attack = None
-        self.sustain = None
-        self.decay = None
+    def LINEAR(self, t0, array):
+        note = np.zeros(len(array))
+        for t in len(array):
+            result = array[t] / t0
+            if result < 1:
+                note[t] = result
+            else:
+                note[t] = 1
+                return note
         
-    def __str__(self):
-        return f"ATTACK: {self.attack}\nSUSTAIN: {self.sustain}\nDECAY: {self.decay}"
-        
-    def LINEAR(self, t0, duration, frec):
-        sample = np.linspace(0, duration, frec)
-        values = np.zeros(len(sample))
-        index = 0
-        for t in sample:
-            values[index] = t / t0
-            index += 1
-        return values
-        
-    def EXP(self, t0, duration, frec):
-        sample = np.linspace(0, duration, frec)
-        print (sample)
-        values = np.zeros(len(sample))
-        index = 0
-        for t in sample:
-            values[index] = np.exp(5 * (t - t0) / t0)
-            index += 1
-        return values
+    def EXP(self, t0, array):
+        note = np.zeros(len(array))
+        for t in len(array):
+            result = np.exp(5 * (array[t] - t0) / t0)
+            if result < 1:
+                note[t] = result
+            else:
+                note[t] = 1
+                return note
 
-    def QUARTSIN(self, t0, duration, frec):
-        sample = np.arange(0, duration + 1/frec, 1/frec)
-        values = np.zeros(len(sample))
-        index = 0
-        for t in sample:
-            values[index] = np.sin((pi * t) / (2 * t0))
-            index += 1
-        return values
+    def QUARTSIN(self, t0, array):
+        note = np.zeros(len(array))
+        for t in len(array):
+            result = np.sin((pi * array[t]) / (2 * t0))
+            if result < 1:
+                note[t] = result
+            else:
+                note[t] = 1
+                return note
 
-    def HALFSIN(self, t0, duration, frec):
-        sample = np.arange(0, duration + 1/frec, 1/frec)
-        values = np.zeros(len(sample))
-        index = 0
-        for t in sample:
-            values[index] = (1 + np.cos(pi * (t / t0 - 0.5))) / 2
-            index += 1
-        return values
+    def HALFSIN(self, t0, array):
+        note = np.zeros(len(array))
+        for t in len(array):
+            result = (1 + np.cos(pi * (array[t] / t0 - 0.5))) / 2
+            if result < 1:
+                note[t] = result
+            else:
+                note[t] = 1
+                return note
 
-    def LOG(self, t0, duration, frec):
-        sample = np.arange(0, duration + 1/frec, 1/frec)
-        values = np.zeros(len(sample))
-        index = 0
-        for t in sample:
-            values[index] = np.log10(9 * t / t0 + 1)
-            index += 1
-        return values
+    def LOG(self, t0, array):
+        note = np.zeros(len(array))
+        for t in len(array):
+            result = np.log10(9 * array[t] / t0 + 1)
+            if result < 1:
+                note[t] = result
+            else:
+                note[t] = 1
+                return note
 
     def TRI(self, t0, t1, a1, duration, frec):
         sample = np.arange(0, duration + 1/frec, 1/frec)
