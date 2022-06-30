@@ -5,22 +5,21 @@ import math
 pi = np.pi
 
 
-def QUARTCOS(self, t0, duration, frec):
-    sample = np.arange(0, duration + 1/frec, 1/frec)
-    values = np.zeros(len(sample))
-    index = 0
-    for t in sample:
-        values[index] = np.cos((pi * t) / (2 * t0))
-        index += 1
+def QUARTCOS(self, t0, array):
+    values = np.zeros(len(array))
+    for t in len(array):
+        while array[t] != 1:
+            pass
+        if array[t] == 1:
+            values[t] = np.cos((pi * array[t]) / (2 * t0))
     return values
 
-def HALFCOS(self, t0, duration, frec):
-    sample = np.arange(0, duration + 1/frec, 1/frec)
-    values = np.zeros(len(sample))
+def HALFCOS(self, t0, array):
+    values = np.zeros(len(array))
     index = 0
-    for t in sample:
-        values[index] = (1 + np.cos(pi * t / t0)) / 2
-        index += 1
+    for t in len(array):
+        if array[t] == 1:
+            values[index] = (1 + np.cos(pi * t / t0)) / 2
     return values
 
 def INVLOG(self, t0, duration, frec):
