@@ -7,6 +7,7 @@ def main():
     duration_attack = 2
     duration_sustain = duration - duration_attack
     duration_decay = 1
+    array = np.linspace(0, duration + duration_decay, freq * 100)
     freq = 440
     array_a = np.linspace(0, duration_attack, freq * 15)
     array_s = np.linspace(duration_attack, duration, freq *15)
