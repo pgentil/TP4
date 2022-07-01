@@ -16,7 +16,6 @@ def main():
     freq = 440
     function = Function()
     array = np.linspace(0, duration + duration_decay, freq * 100)
-    print (array)
     newarray = array[array <= duration]
     indexn = np.where(array == newarray[-1])
     array2 = np.linspace(0, duration + duration_decay, freq * 100)
