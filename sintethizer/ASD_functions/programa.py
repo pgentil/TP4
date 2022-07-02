@@ -1,4 +1,5 @@
 from tracemalloc import start
+from types import new_class
 import numpy as np
 from regex import F
 from functions import Function
@@ -15,24 +16,29 @@ def main():
         1: 1,
         2: 0.72727272,
         3: 0.31818181,
-        4: 0.090909
+        4: 0.090909,
     }
-    duration = 5
-    duration_attack = 2
+    duration = 0.3
+    duration_attack = 0.02
     duration_sustain = duration - duration_attack
-    duration_decay = 1
+    duration_decay = 0.06
     freq = 440
+    sample = 9000
+
+
     function = Function()
-    array = np.linspace(0, duration + duration_decay, freq)
+
+    
+    array = np.linspace(0, duration + duration_decay, sample)
     sinoidal = soundwave(array, dictionary ,freq, 0)
     # plt.plot(array, newarray)
-
+    sino = sin(dictionary[2], freq, array, 0)
     newarray = array[array <= duration]
     indexn = np.where(array == newarray[-1])
-    array2 = np.linspace(0, duration + duration_decay, freq)
-    array = np.where(array > duration_attack, array, function.EXP(duration_attack, array))
+    array2 = np.linspace(0, duration + duration_decay, sample)
+    array = np.where(array > duration_attack, array, function.LINEAR(duration_attack, array))
     array = np.where(np.logical_or((array <= duration_attack), (array > duration)), array, function.CONSTANT(array))
-    array = np.where(array <= duration, array, function.INVEXP(duration_decay, array - duration) * (array[indexn] - 0.2))
+    array = np.where(array <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[indexn] - 0.2))
 
     final = array * sinoidal
 
@@ -50,21 +56,22 @@ def main():
     # for t in range(len(array_d)):
     #     array_d[t] += duration
 
-    
-    plt.plot(array2, final)
+    # plt.plot(array2, sinoidal)
+    # plt.plot(array2, final)
+    plt.plot(array2, array)
     # plt.plot(array_s, sustain)
     # plt.plot(array_d, decay)
     plt.show()
 
 
-def sin(intensity, freq, value, start):
+def sin(value, intensity, freq, start):
     result = intensity * np.sin(np.pi * freq * (value - start))
     return result
 
 def soundwave(array: np.array, harmonics: dict, freq, start)-> np.array:
     soundwave = np.zeros(len(array))
     for i in range(1, len(harmonics) + 1):
-        newarray = sin(harmonics[i], freq * list(harmonics.keys())[i - 1], array, start)
+        newarray = sin(array, harmonics[i], freq * list(harmonics.keys())[i - 1], start)
         soundwave += newarray
     return soundwave
 
