@@ -22,7 +22,7 @@ def main():
     duration_sustain = duration - duration_attack
     duration_decay = 0.02
     freq = 220
-    sample = 9000
+    sample = 441000
 
 
     function = Function()
