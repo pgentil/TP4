@@ -40,7 +40,9 @@ def main():
     array = np.where(np.logical_or((array2 <= duration_attack), (array2 > duration)), array, function.CONSTANT(array))
     array = np.where(array2 <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[indexn]))
 
-    final = array * sinoidal
+
+    A = 1
+    final = A * array * sinoidal
 
     # array_a = np.linspace(0, duration_attack, freq * 15)
     # array_s = np.linspace(duration_attack, duration, freq *15)

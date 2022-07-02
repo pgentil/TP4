@@ -32,7 +32,7 @@ class Function():
         print(index)
         notes = np.zeros(len(array))
         notes = np.where(array > t1, notes, array * a1 / t1)
-        notes = np.where(array < t1, notes, ((array- t1)/ (t1 - t0)) + a1)
+        notes = np.where(array < t1, notes, ((array/(-t0)) + ((-t1)/ (-t0)) + a1))
         # for t in range(len(array)):
         #     if array[t] < t1:
         #         notes[t] = array[t] * a1 / t1
