@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 def main():
     dictionary = {
-        
+
     }
     duration = 5
     duration_attack = 2
@@ -52,7 +52,7 @@ def sin(intensity, freq, value, start):
 def soundwave(array: np.array, harmonics: dict, freq, start)-> np.array:
     soundwave = np.array()
     for i in range(1, len(harmonics) + 1):
-        soundwawe =+ np.where(array, array, sin(list(harmonics[i]), freq * i, array, start))
+        soundwave =+ np.where(array, array, sin(list(harmonics[i]), freq * i, array, start))
     return soundwave
             
 
