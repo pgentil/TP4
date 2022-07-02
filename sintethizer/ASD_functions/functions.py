@@ -14,9 +14,11 @@ class Function():
         return note
         
     def EXP(self, t0, array):
-        note = np.zeros(len(array))
-        for t in range(len(array)):
-            note[t] = np.exp(5 * (array[t] - t0) / t0)
+        #note = np.zeros(len(array))
+        #for t in range(len(array)):
+           # note[t] = np.exp(5 * (array[t] - t0) / t0)
+        
+        note = np.exp(5 * (array - t0) / t0)
         return note
 
     def QUARTSIN(self, t0, array):
@@ -51,14 +53,19 @@ class Function():
 
     def INVLINEAR(self, t0, array):
         note = np.zeros(len(array))
-        for t in range(len(array)):
-            note[t] = max((1 - (array[t] / t0), 0))
+        #for t in range(len(array)):
+         #   note[t] = max((1 - (array[t] / t0), 0))
+        
+        note = 1 - (array / t0)
+        note[array < 0] = 0
         return note
 
     def SIN(self, a, f, array):
         note = np.zeros(len(array))
-        for t in range(len(array)):
-            note[t] = 1 + (a * np.sin(f * array[t]))
+        #for t in range(len(array)):
+            #note[t] = 1 + (a * np.sin(f * array[t]))
+        
+        note = 1 + (a * np.sin(f * array))
         return note
 
     def INVEXP(self, t0, array):
@@ -104,9 +111,9 @@ class Function():
 if __name__ == "__main__":
     function1 = Function()
 
-    result = function1.EXP(2, 0.02, 50)
+    result = function1.INVLINEAR(3, np.array([1, 2, 3, 4, 5, 6]))
     print(result)
-    x = np.linspace(0, 0.02, 50)
+    x = np.linspace(0, 1, 6)
     plt.plot(x, result)
     plt.show()
 
