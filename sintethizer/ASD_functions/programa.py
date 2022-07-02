@@ -1,7 +1,4 @@
-from tracemalloc import start
-from types import new_class
 import numpy as np
-from regex import F
 from functions import Function
 import matplotlib.pyplot as plt
 
@@ -18,27 +15,30 @@ def main():
         3: 0.31818181,
         4: 0.090909,
     }
+
+
     duration = 0.3
-    duration_attack = 0.02
+    duration_attack = 0.05
     duration_sustain = duration - duration_attack
-    duration_decay = 0.06
-    freq = 440
+    duration_decay = 0.02
+    freq = 220
     sample = 9000
 
 
     function = Function()
 
-    
+
     array = np.linspace(0, duration + duration_decay, sample)
     sinoidal = soundwave(array, dictionary ,freq, 0)
     # plt.plot(array, newarray)
     sino = sin(dictionary[2], freq, array, 0)
     newarray = array[array <= duration]
     indexn = np.where(array == newarray[-1])
+    print(array[indexn])
     array2 = np.linspace(0, duration + duration_decay, sample)
-    array = np.where(array > duration_attack, array, function.LINEAR(duration_attack, array))
-    array = np.where(np.logical_or((array <= duration_attack), (array > duration)), array, function.CONSTANT(array))
-    array = np.where(array <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[indexn] - 0.2))
+    array = np.where(array2 > duration_attack, array, function.TRI(duration_attack, 0.03, 1.3, array))
+    array = np.where(np.logical_or((array2 <= duration_attack), (array2 > duration)), array, function.CONSTANT(array))
+    array = np.where(array2 <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[indexn]))
 
     final = array * sinoidal
 
@@ -57,8 +57,8 @@ def main():
     #     array_d[t] += duration
 
     # plt.plot(array2, sinoidal)
-    # plt.plot(array2, final)
     plt.plot(array2, array)
+    plt.plot(array2, final)
     # plt.plot(array_s, sustain)
     # plt.plot(array_d, decay)
     plt.show()

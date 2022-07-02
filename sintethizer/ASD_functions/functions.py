@@ -28,13 +28,16 @@ class Function():
         return note
 
     def TRI(self, t0, t1, a1, array):
+        index = np.where(array == (array[array < t1][-1]))
+        print(index)
         notes = np.zeros(len(array))
-        for t in range(len(array)):
-            if array[t] < t1:
-                notes[t] = array[t] * a1 / t1
-            elif t > t1:
-                notes[t] = (array[t] - t1) / (t1 - t0)
-        
+        notes = np.where(array > t1, notes, array * a1 / t1)
+        notes = np.where(array < t1, notes, ((array- t1)/ (t1 - t0)) + a1)
+        # for t in range(len(array)):
+        #     if array[t] < t1:
+        #         notes[t] = array[t] * a1 / t1
+        #     elif t > t1:
+        #         notes[t] = (array[t] - t1) / (t1 - t0)
         return notes
 
     def CONSTANT(self, array):
@@ -88,14 +91,14 @@ class Function():
 if __name__ == "__main__":
     function1 = Function()
 
-    result = function1.EXP(5, np.array([1, 2, 3, 4, 5, 6]))
+    result = function1.TRI(0.05, 0.03, 1.3, np.linspace(0,0.05, 100))
     print(result)
-    x = np.linspace(0, 1, 6)
+    x = np.linspace(0,0.05, 100)
     plt.plot(x, result)
     plt.show()
 
-    def liner(array, t0):
-        result = array  * (1/t0)
-        return result
+    # def liner(array, t0):
+    #     result = array  * (1/t0)
+    #     return result
             
     
