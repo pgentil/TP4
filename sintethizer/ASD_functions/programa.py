@@ -28,21 +28,19 @@ def main():
     function = Function()
 
 
-    array = np.linspace(0, duration + duration_decay, sample)
-    sinoidal = soundwave(array, dictionary ,freq, 0)
+    array = np.linspace(0, duration + duration_decay, sample) ## FUNCION CAMELLO SIN MODIFICAR
+    sinoidal = soundwave(array, dictionary ,freq, 0) ## FUNCION SINODIAL HAY QUE CAMBIARLE EL NOMBRE A INGLES
     # plt.plot(array, newarray)
-    sino = sin(dictionary[2], freq, array, 0)
-    newarray = array[array <= duration]
-    indexn = np.where(array == newarray[-1])
-    print(array[indexn])
-    array2 = np.linspace(0, duration + duration_decay, sample)
+    sino = sin(dictionary[2], freq, array, 0) ##FUNCION DE PRUEBA DE SOLO UNA FUNCION SENO SIN INCLUIR A LA SUMA DE SINOIDALES
+    newarray = array[array <= duration] ## ARRAY PARA AGARRAR EL ULTIMO ELEMENTO ANTES DEL DECAY
+    array2 = np.linspace(0, duration + duration_decay, sample) ## EJE X PARA EL PLOT
     array = np.where(array2 > duration_attack, array, function.TRI(duration_attack, 0.03, 1.3, array))
     array = np.where(np.logical_or((array2 <= duration_attack), (array2 > duration)), array, function.CONSTANT(array))
-    array = np.where(array2 <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[indexn]))
+    array = np.where(array2 <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[len(newarray)-1]))
 
 
-    A = 1
-    final = A * array * sinoidal
+    A = 1 ##AMPLITUD
+    final = A * array * sinoidal ## EN EL ENUNCIADO ESTA COMO A*y(t)*m(t)
 
     # array_a = np.linspace(0, duration_attack, freq * 15)
     # array_s = np.linspace(duration_attack, duration, freq *15)
@@ -59,10 +57,11 @@ def main():
     #     array_d[t] += duration
 
     # plt.plot(array2, sinoidal)
-    plt.plot(array2, array)
-    plt.plot(array2, final)
     # plt.plot(array_s, sustain)
     # plt.plot(array_d, decay)
+
+    plt.plot(array2, array)
+    plt.plot(array2, final)
     plt.show()
 
 
