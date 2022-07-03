@@ -45,7 +45,7 @@ class Function():
 
     def INVLINEAR(self, t0, array):
         note = 1 - (array / t0)
-        note[array < 0] = 0
+        note[note < 0] = 0
         return note
 
     def SIN(self, a, f, array):
@@ -61,28 +61,18 @@ class Function():
         return note
 
     def HALFCOS(self, t0, array):
-        note = np.zeros(len(array))
-        for t in range(len(array)):
-            note[t] = (1 + np.cos(pi * t / t0)) / 2
+        note = (1 + np.cos(pi * array / t0)) / 2
         return note
 
     def INVLOG(self, t0, array):
         note = np.zeros(len(array))
-        for t in range(len(array)):
-            if t < t0:
-                note[t] = np.log10((-9 * t) / t0 + 10)
-            else:
-                note[t] = 0
+        note[array <= t0] = np.log10(-9 * array[array <= t0] / t0 + 10)
+        note[array > t0] = 0
         return note
 
     def PULSES(self, t0, t1, a1, array): ##NO FUNCIONA
-        note = np.zeros(len(array))
-        print(note)
-        for t in range(len(array)):
-            tz = (array[t] / t0) - math.floor(array[t] / t0)
-            print(tz)
-            note[t] = min(abs(((1 - a1) / t1) * (tz - t0 + t1)) + a1)
-            print (note)
+        prime_t = (array/ t0) - math.floor(array/t0)
+        note = abs(((1-a1)/t0)*(prime_t - t0 + t1)) + a1
         return note
 
         
