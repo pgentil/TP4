@@ -10,7 +10,7 @@ class Notes():
         self._note = param[1]
         self._duration = float(param[2])
         self._freq = None
-        self._soundwave = np.zeros(len(np.array))
+        self._soundwave = None
 
         for i in notes.notes_mapping:
             if i[0] == self._note:
@@ -34,6 +34,21 @@ class Notes():
         """Getter method of the duration of the note. Returns duration of the note."""
         return self._duration
 
+    @property
+    def soundwave(self) -> np.array|None:
+        """Getter method of the soundwave of the note. Returns soundwave of the note. If there is no soundwave
+        it returns None."""
+        return self._soundwave
+    
+
+    @soundwave.setter
+    def soundwave(self, value: np.array):
+        """Setter method for the soundwave. Returns None
+        
+        Arguments:
+        value -- A numpy array containing different values that model the final soundwave of the note
+        """
+        self._soundwave = value
 
     def __eq__(self, other: 'Notes'):
         return self.start == other. start

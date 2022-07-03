@@ -1,10 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from functions import Function
+from notespoo import Notes
 
 class Instrument:
     
-    def __init__(self, instrument: str, note):
+    def __init__(self, instrument: str, note: Notes):
         self.instrument = instrument
         self.harmonics = None
         self.functions = []
