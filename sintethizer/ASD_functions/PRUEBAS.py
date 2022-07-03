@@ -7,8 +7,10 @@ Created on Sat Jul  2 18:11:01 2022
 
 import numpy as np
 import matplotlib.pyplot as plt
-from profes_docs import notes
+import notes
 from scipy.io.wavfile import write
+
+from notespoo import Notes
 
 """crear un array grande. Leer la nota y crear una funcion,
 con su respectiva duración y comienzo(otro array).
@@ -18,7 +20,7 @@ por fun_sen en la creacion del archivo"""
 def read_scores(score_archive): #este archivo devuelve lo que dice en escala
     with open(score_archive, 'r') as scr:
         scores = []
-        for i in range(6):
+        for i in range(12):
             line = (scr.readline()).rstrip('\n')
             line = line.split(' ')
             scores.append(line)
@@ -56,15 +58,24 @@ def complete_array(leido, total_len, score_len, sample_rate):
     return big_array
 
 
-leido = read_scores('profes_docs/scores/escala.txt')
-print(leido)
+def gen_list_note(scores):
+    list_note = []
+    for i in scores:
+        note = Notes(i)
+        list_note.append(note)
+    return list_note
 
 
-total_len = float(leido[-1][0]) + float(leido[-1][2])
-print(total_len)
-score_len = len(leido)
-print(score_len)
-song = complete_array(leido, total_len, score_len, 44100)
+leido = read_scores('sintethizer\ASD_functions\escala.txt')
+lista = gen_list_note(leido)
+lista.sort()
+print(lista)
+
+# total_len = float(leido[-1][0]) + float(leido[-1][2])
+# print(total_len)
+# score_len = len(leido)
+# print(score_len)
+# song = complete_array(leido, total_len, score_len, 44100)
 
 
 
@@ -78,15 +89,15 @@ song = complete_array(leido, total_len, score_len, 44100)
 
 """ ---------------ESTA PARTE CREA EL ARCHIVO DE AUDIO----------------"""
 #armamos una nota 
-duration_note = 4
-sample_rate = 44100
-t = np.arange(0, duration_note, 1/sample_rate)
-freq = 440
+# duration_note = 4
+# sample_rate = 44100
+# t = np.arange(0, duration_note, 1/sample_rate)
+# freq = 440
 
 
-fun_sen = 1 * np.sin(2 * np.pi * freq * t)
+# fun_sen = 1 * np.sin(2 * np.pi * freq * t)
 #print(fun_sen)
 
-write('prueba1.wav', sample_rate, song) #fun_sen es la canción entera
+# write('prueba1.wav', sample_rate, song) #fun_sen es la canción entera
 
 """ -----------------------------------------------------------------"""

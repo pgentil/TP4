@@ -5,6 +5,7 @@ import notes
 
 class Notes():
     def __init__ (self, param: list):
+        print(param)
         self._start = float(param[0])
         self._note = param[1]
         self._duration = float(param[2])
@@ -13,7 +14,7 @@ class Notes():
         for i in notes.notes_mapping:
             if i[0] == self._note:
                 self._freq = i[1]
-                
+
         if self._freq == None:
             raise ValueError("Check that the music sheet has valid notes.")
 
