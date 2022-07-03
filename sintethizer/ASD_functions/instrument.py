@@ -59,23 +59,7 @@ def get_func(param: list, array):
             raise AssertionError('The given function is non-existant.')
         return func
     
-
-# def read_instrument1(instrument) -> list:
-#     data = []
-#     with open(f"instruments/{instrument}", 'r') as ins:
-#         for line in ins:
-#             line.rstrip('\n')
-#             info = line.split()
-#             for i in range(len(info)):
-#                 if '.' in info[i]:
-#                     info[i] = float(info[i])
-#                 elif info[i].isnumeric() == True:
-#                     info[i] = int(info[i])
-#             data.append(info)
-#     return data
-
-# La función de acá arriba ya quedó obsoleta, pero la comento por las dudas
-
+    
 if __name__ == "__main__":
     piano = Instrument('Piano')
     piano.read_instrument('piano.txt')
