@@ -4,11 +4,12 @@ from functions import Function
 
 class Instrument:
     
-    def __init__(self, instrument: str, note: Note):
+    def __init__(self, instrument: str, note):
         self.instrument = instrument
         self.harmonics = None
         self.functions = []
         self.note = note
+        self.ASD = None
 
     def read_instrument(self, filename: str):
         '''
@@ -35,7 +36,7 @@ class Instrument:
                         param[i] = float(param[i])
                 self.functions.append(param)
                 
-    def get_functions(self, param: list, array: np.array):
+    def get_functions(self, param: list, array: np.array) -> np.array:
         '''
         Using a list of parameters (including the name of the function), it executes every function evaluating it with the given array.
         Returns said array evaluated by its designated function.
@@ -79,30 +80,33 @@ class Instrument:
             raise AssertionError('The given function is non-existent.')
         return myfunction
     
-    def ASD_function(self):
+    def ASD_function(self, iterations: int):
+        '''
+        Using the "functions" attribute, this function creates the whole "Attack, Sustain, Decay" continuous function.
+        The resulting array is assigned to the "ASD" attribute from the Instrument object.
+        
+        '''
         duration = self.note.duration
         freq = self.note.freq
         duration_attack = (self.functions[0])[1]
         duration_sustain = duration - duration_attack
         duration_decay = (self.functions[2])[1]
-        
-
-#%% 
+        array, clean_array = np.linspace(0, duration + duration_decay, iterations), np.linspace(0, duration + duration_decay, iterations)
+        last_sust_index = len(array[array <= duration]) - 1
+        counter = 0
+        for stage in self.functions:
+            if counter == 0:
+                array = np.where(clean_array > duration_attack, array, self.get_functions(stage, array))
+            elif counter == 1:
+                array = np.where(np.logical_or((clean_array <= duration_attack), (clean_array > duration)), array, self.get_functions(stage, array))
+            elif counter == 2:
+                array = np.where(clean_array <= duration, array, self.get_functions(stage, array - duration) * (array[last_sust_index]))
+            else:
+                raise ValueError('Counter has reached an unintended value.')
+            counter += 1
+        self.ASD = array
 
 
 if __name__ == "__main__":
     piano = Instrument('Piano', 4)
     piano.read_instrument('piano.txt')
-    
-    # duration = 0.3
-    # duration_attack = 0.05
-    # duration_sustain = duration - duration_attack
-    # duration_decay = 0.02
-    # freq = 220
-    # sample = 441000
-    
-    # array = np.linspace(0, duration + duration_decay, sample)
-    # last_sustained_index = len(array[array <= duration])-1
-    # array = np.where(array2 > duration_attack, array, function.TRI(duration_attack, 0.03, 1.3, array))
-    # array = np.where(np.logical_or((array2 <= duration_attack), (array2 > duration)), array, function.CONSTANT(array))
-    # array = np.where(array2 <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[last_sustained_index]))
