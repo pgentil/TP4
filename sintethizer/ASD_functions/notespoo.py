@@ -1,6 +1,6 @@
 
 import notes
-
+import numpy as np
 
 
 class Notes():
@@ -10,6 +10,7 @@ class Notes():
         self._note = param[1]
         self._duration = float(param[2])
         self._freq = None
+        self._soundwave = np.zeros(len(np.array))
 
         for i in notes.notes_mapping:
             if i[0] == self._note:
