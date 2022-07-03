@@ -32,13 +32,13 @@ def main():
     sinoidal = soundwave(array, dictionary ,freq, 0) ## FUNCION SINODIAL HAY QUE CAMBIARLE EL NOMBRE A INGLES
     # plt.plot(array, newarray)
     sino = sin(dictionary[2], freq, array, 0) ##FUNCION DE PRUEBA DE SOLO UNA FUNCION SENO SIN INCLUIR A LA SUMA DE SINOIDALES
-    last_sustained_value = len(array[array <= duration])-1 ## ARRAY PARA AGARRAR EL ULTIMO ELEMENTO ANTES DEL DECAY
-    print(last_sustained_value)
+    last_sustained_index = len(array[array <= duration])-1 ## ARRAY PARA AGARRAR EL ULTIMO ELEMENTO ANTES DEL DECAY
+    print(last_sustained_index)
     array2 = np.linspace(0, duration + duration_decay, sample) ## EJE X PARA EL PLOT
     array = np.where(array2 > duration_attack, array, function.TRI(duration_attack, 0.03, 1.3, array))
     array = np.where(np.logical_or((array2 <= duration_attack), (array2 > duration)), array, function.CONSTANT(array))
-    print (array[last_sustained_value])
-    array = np.where(array2 <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[last_sustained_value]))
+    print (array[last_sustained_index])
+    array = np.where(array2 <= duration, array, function.INVLINEAR(duration_decay, array - duration) * (array[last_sustained_index]))
 
 
     A = 1 ##AMPLITUD
