@@ -72,7 +72,7 @@ class Function():
 
     def PULSES(self, t0, t1, a1, array): ##NO FUNCIONA
         prime_t = (array/ t0) - math.floor(array/t0)
-        note = abs(((1-a1)/t0)*(prime_t - t0 + t1)) + a1
+        note = np.min(abs(((1-a1)/t0)*(prime_t - t0 + t1)) + a1)
         return note
 
         
