@@ -6,18 +6,23 @@ class Instrument:
     def __init__(self, instrument):
         self.instrument = instrument
         self.harmonics = None
+        self.functions = []
 
-    def read_instrument(self, instrument):
+    def read_instrument(self, filename):
         waves = {}
-        with open(f"/{instrument}", 'r') as ins: #instruments/
-            harmonics = int(ins.readline())
-            for i in range(harmonics):
-                line = (ins.readline()).rstrip('\n')
-                line = line.split(' ')
+        with open(f"instruments/{filename}", 'r') as ins:
+            harmonic_quantity = int(ins.readline())
+            for i in range(harmonic_quantity):
+                line = ((ins.readline()).rstrip('\n')).split(' ')
                 waves[int(line[0])] = float(line[1])
             self.harmonics = waves
-
-
+            for line in ins:
+                param = line.split(' ')
+                for i in range(len(param)):
+                    param[i] = param[i].rstrip('\n')
+                    if i > 0:
+                        param[i] = float(param[i])
+                self.functions.append(param)
 
 
 def get_func(param: list, array):
@@ -55,23 +60,24 @@ def get_func(param: list, array):
         return func
     
 
-def read_instrument1(instrument) -> list:
-    data = []
-    with open(f"/{instrument}", 'r') as ins:
-        for line in ins:
-            line.rstrip('\n')
-            info = line.split()
-            for i in range(len(info)):
-                if '.' in info[i]:
-                    info[i] = float(info[i])
-                elif info[i].isnumeric() == True:
-                    info[i] = int(info[i])
-            data.append(info)
-    return data
+# def read_instrument1(instrument) -> list:
+#     data = []
+#     with open(f"instruments/{instrument}", 'r') as ins:
+#         for line in ins:
+#             line.rstrip('\n')
+#             info = line.split()
+#             for i in range(len(info)):
+#                 if '.' in info[i]:
+#                     info[i] = float(info[i])
+#                 elif info[i].isnumeric() == True:
+#                     info[i] = int(info[i])
+#             data.append(info)
+#     return data
+
+# La función de acá arriba ya quedó obsoleta, pero la comento por las dudas
 
 if __name__ == "__main__":
-    piano = Instrument("piano.txt")
-    # piano.read_instrument('piano.txt')
-    # print(piano.harmonics)
-
-    print(read_instrument1("piano.txt"))
+    piano = Instrument('Piano')
+    piano.read_instrument('piano.txt')
+    print(piano.harmonics)
+    print(piano.functions)
