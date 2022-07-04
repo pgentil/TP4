@@ -3,7 +3,7 @@ from instrument import Instrument
 from notespoo import Notes
 import PRUEBAS
 import numpy as np
-import synthesizer
+from scipy.io.wavfile import write
 
 scores = 'queen.txt'
 instrument = 'piano.txt'
@@ -24,7 +24,7 @@ for i in SCORES:
 
     big_array = PRUEBAS.complete_array(big_array ,note, fs, decay_duration)
 
-synthesizer.create_song("lol.wav", fs, big_array)
+write("lol.wav", fs, big_array)
 
     
 
