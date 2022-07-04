@@ -11,6 +11,7 @@ class Instrument:
         self.functions = []
         self.note = note
         self.ASD = None
+        self.sin = None
 
     def read_instrument(self, filename: str):
         '''
@@ -88,9 +89,7 @@ class Instrument:
         
         '''
         duration = self.note.duration
-        freq = self.note.freq
         duration_attack = (self.functions[0])[1]
-        duration_sustain = duration - duration_attack
         duration_decay = (self.functions[2])[1]
         array, clean_array = np.linspace(0, duration + duration_decay, iterations), np.linspace(0, duration + duration_decay, iterations)
         last_sust_index = len(array[array <= duration]) - 1
@@ -106,8 +105,26 @@ class Instrument:
                 raise ValueError('Counter has reached an unintended value.')
             counter += 1
         self.ASD = array
+        
+    def sin(self, array, intensity):
+        start, freq = self.note.start, self.note.freq
+        result = intensity * np.sin(np.pi * freq * (array - start))
+        return result
+        
+    def sinewave(self):
+        sinewave = np.zeros(len(self.ASD))
+        for i in range(1, len(self.harmonics) + 1):
+            newarray = self.sin(self.ASD, self.harmonics[i], self.note.freq * list(self.harmonics.keys())[i - 1], self.note.start)
+            sinewave += newarray
+        self.sin = sinewave
 
+    def get_full_func(self, amplitude):
+        return amplitude * self.ASD * self.sin
 
 if __name__ == "__main__":
-    piano = Instrument('Piano', 4)
+    nh = [0, 'C8', 0.5]
+    note = Notes(nh)
+    piano = Instrument('Piano', note)
     piano.read_instrument('piano.txt')
+    piano.ASD_function(44100)
+    
