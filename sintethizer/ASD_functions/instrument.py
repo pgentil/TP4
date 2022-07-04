@@ -6,33 +6,21 @@ from notespoo import Notes
 
 class Instrument:
     
-    def __init__(self, file: str, note: Notes, fs: int):
+    def __init__(self, file: str, fs: int):
         self.file = file
-        self.harmonics = None
+        self.harmonics = {}
         self.functions = []
-        self.note = note
+        self.note = None
         self.ASD = None
         self.sinoid = None #sintethizer\ASD_functions\instruments\piano.txt
         self.fs = fs
         self.array = None
 
-    def read_instrument(self):
-        '''
-        Reads the instrument .txt file and saves two different attributes for the Instrument object: harmonics and functions.
-        
-        ---
-        
-        filename: str || Must be the name of a .txt file within the 'instruments' folder, containing the number
-        of harmonics, the harmonics themselves, and the functions along with their specific parameters.
-        
-        '''
-        waves = {}
         with open(f"sintethizer\ASD_functions\instruments\{self.file}", 'r') as ins:
             harmonic_quantity = int(ins.readline())
             for i in range(harmonic_quantity):
                 line = ((ins.readline()).rstrip('\n')).split(' ')
-                waves[int(line[0])] = float(line[1])
-            self.harmonics = waves
+                self.harmonics[int(line[0])] = float(line[1])
             for line in ins:
                 param = line.split(' ')
                 for i in range(len(param)):
@@ -40,8 +28,46 @@ class Instrument:
                     if i > 0:
                         param[i] = float(param[i])
                 self.functions.append(param)
-        self.array = np.linspace(self.note.start, self.note.start + self.note.duration + self.functions[2][1], round(self.fs * (self.note.duration + self.functions[2][1])))
-         
+
+    # def read_instrument(self):
+    #     '''
+    #     Reads the instrument .txt file and saves two different attributes for the Instrument object: harmonics and functions.
+        
+    #     ---
+        
+    #     filename: str || Must be the name of a .txt file within the 'instruments' folder, containing the number
+    #     of harmonics, the harmonics themselves, and the functions along with their specific parameters.
+        
+    #     '''
+    #     waves = {}
+    #     with open(f"sintethizer\ASD_functions\instruments\{self.file}", 'r') as ins:
+    #         harmonic_quantity = int(ins.readline())
+    #         for i in range(harmonic_quantity):
+    #             line = ((ins.readline()).rstrip('\n')).split(' ')
+    #             waves[int(line[0])] = float(line[1])
+    #         self.harmonics = waves
+    #         for line in ins:
+    #             param = line.split(' ')
+    #             for i in range(len(param)):
+    #                 param[i] = param[i].rstrip('\n')
+    #                 if i > 0:
+    #                     param[i] = float(param[i])
+    #             self.functions.append(param)
+    #     self.array = np.linspace(self.note.start, self.note.start + self.note.duration + self.functions[2][1], round(self.fs * (self.note.duration + self.functions[2][1])))
+        
+    
+
+
+
+    def set_note(self, value: Notes):
+        self.note = value
+        self.set_array(np.linspace(0, value.duration + self.functions[2][1], round(self.fs * (value.duration + self.functions[2][1]))))
+
+    
+
+
+    def set_array(self, value: np.array):
+        self.array = value
 
     def get_functions(self, param: list, array: np.array) -> np.array:
         '''
@@ -110,12 +136,10 @@ class Instrument:
                 raise ValueError('Counter has reached an unintended value.')
             counter += 1
         self.ASD = asd
-        plt.plot(self.array, self.ASD)
-        plt.show()
         
     def sin(self, intensity, freq):
-        start = self.note.start
-        result = intensity * np.sin(np.pi * freq * (self.array - start))
+        # start = self.note.start
+        result = intensity * np.sin(np.pi * freq * (self.array))
         return result
         
     def sinewave(self):
@@ -130,16 +154,13 @@ class Instrument:
         return amplitude * self.ASD * self.sinoid
 
     def get_full_func(self):
-        self.read_instrument()
         self.ASD_function()
         self.sinewave()
         return self.full_func(1)
 
 if __name__ == "__main__":
-    nh = [0, 'A4', 0.5]
+    nh = [24, 'A4', 0.1]
     note = Notes(nh)
     parameter = 'piano.txt'
     piano = Instrument(parameter, note, 44100)
     array = piano.get_full_func()
-    plt.plot(piano.array, array)
-    plt.show()

@@ -7,8 +7,10 @@ Created on Sat Jul  2 18:11:01 2022
 
 import numpy as np
 import matplotlib.pyplot as plt
-from profes_docs import notes
+import notes
 from scipy.io.wavfile import write
+
+from notespoo import Notes
 
 """crear un array grande. Leer la nota y crear una funcion,
 con su respectiva duración y comienzo(otro array).
@@ -16,7 +18,7 @@ Sumar esos arrays chicos al grande. El array grande reemplazarlo
 por fun_sen en la creacion del archivo"""
 
 def read_scores(score_archive): #este archivo devuelve lo que dice en escala
-    with open(score_archive, 'r') as scr:
+    with open(f'sintethizer\ASD_functions\scores\{score_archive}', 'r') as scr:
         scores = []
         for line in scr:
             line = (scr.readline()).rstrip('\n')
@@ -37,25 +39,34 @@ def create_func(freq: float, sample_rate: int, duration_note: float): #la funcio
     return one_array
 
 
-def complete_array(leido, total_len, score_len, sample_rate): 
-    big_array = np.zeros(int(total_len * sample_rate)+1) #a esto se le debe agregar las muestras del último decay
-    print(f'Big array: {len(big_array)}')
-    for n in range(score_len):
-        freq = select_freq(leido, n)
-        #print(freq)
-        func = create_func(freq, sample_rate, float(leido[n][2]))
-        start = int(float(leido[n][0]) * sample_rate)
-        #print(start)
-        end = len(func) + start 
-        #print(end)
+# def complete_array(leido, total_len, score_len, sample_rate): 
+#     big_array = np.zeros(int(total_len * sample_rate)+1) #a esto se le debe agregar las muestras del último decay
+#     print(f'Big array: {len(big_array)}')
+#     for n in range(score_len):
+#         freq = select_freq(leido, n)
+#         #print(freq)
+#         func = create_func(freq, sample_rate, float(leido[n][2]))
+#         start = int(float(leido[n][0]) * sample_rate)
+#         #print(start)
+#         end = len(func) + start 
+#         #print(end)
         
-        big_array[start:end] += func
+#         big_array[start:end] += func
+        
+#     return big_array
+
+def complete_array(big_array, note: Notes, fs: int, decay_duration): 
+    print(f'Big array: {len(big_array)}')
+    print(note.start)
+    print(note.duration)
+    print(note.soundwave)
+        
+    big_array[round(note.start * fs): round((note.start) * fs) + len(note.soundwave)] += note.soundwave
         
     return big_array
 
 
-leido = read_scores('profes_docs/scores/debussy-clair-de-lune.txt')
-print(leido)
+
 
 def song_duration(leido):
     total_len = 0
@@ -65,17 +76,8 @@ def song_duration(leido):
             total_len = duration
     return total_len
 
-    
-
-score_len = len(leido)
-#print(score_len)
-total_len = song_duration(leido)
-print(total_len)
-song = complete_array(leido, total_len, score_len, 44100)
 
 
-
-sample_rate = 44100
 def create_song(archive_name, sample_rate, array_song):
     """
     Creates a wavefile
@@ -90,6 +92,18 @@ def create_song(archive_name, sample_rate, array_song):
 
     """
     write(archive_name, sample_rate, array_song)
-    
-create_song('prueba3.wav', sample_rate, song)
-    
+
+if __name__ == "__main__":
+
+
+    leido = read_scores('profes_docs/scores/debussy-clair-de-lune.txt')
+    print(leido)
+    score_len = len(leido)
+    #print(score_len)
+    total_len = song_duration(leido)
+    print(total_len)
+    song = complete_array(leido, total_len, score_len, 44100)
+
+
+
+    sample_rate = 44100
