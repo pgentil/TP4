@@ -138,7 +138,7 @@ class Instrument:
         self.ASD = asd
         
     def sin(self, intensity, freq, multipliers):
-        print(freq)
+        print(freq * multipliers)
         result = intensity * np.sin(2 * np.pi * freq * multipliers * (self.array))
         return result
         
@@ -162,5 +162,5 @@ if __name__ == "__main__":
     note = Notes(nh)
     parameter = 'piano.txt'
     piano = Instrument(parameter, 44100)
-    
+
     array = piano.get_full_func()
