@@ -35,7 +35,7 @@ class Notes():
         return self._duration
 
     @property
-    def soundwave(self) -> np.array|None:
+    def soundwave(self) -> np.array or None:
         """Getter method of the soundwave of the note. Returns soundwave of the note. If there is no soundwave
         it returns None."""
         return self._soundwave

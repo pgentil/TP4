@@ -103,8 +103,7 @@ class TestFunctions(unittest.TestCase):
         # self.assertTrue(np.allclose(result, expected))
 
     def tearDown(self) -> None:
-        pass
-
+        del self.function
 
 if __name__ == "__main__":
     unittest.main()
