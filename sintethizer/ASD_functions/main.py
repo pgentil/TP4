@@ -19,7 +19,7 @@ big_array = np.zeros(round(song_duration * fs) + round(decay_duration * fs) + 1)
 for i in SCORES:
     note = Notes(i)  #el renglon num i de la partitura
     piano.set_note(note)
-    print(f'nota: {note}')  #F4
+    # print(f'nota: {note}')  #F4
     note.soundwave = piano.get_full_func() #devuelve la senial de la nota con asd y armonicos incluidos
 
     big_array = PRUEBAS.complete_array(big_array ,note, fs, decay_duration)

@@ -5,7 +5,6 @@ import numpy as np
 
 class Notes():
     def __init__ (self, param: list):
-        print(param)
         self._start = float(param[0])
         self._note = param[1]
         self._duration = float(param[2])

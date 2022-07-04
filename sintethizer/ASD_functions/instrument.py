@@ -138,6 +138,7 @@ class Instrument:
         self.ASD = asd
         
     def sin(self, intensity, freq):
+        print(freq)
         # start = self.note.start
         result = intensity * np.sin(np.pi * freq * (self.array))
         return result
@@ -146,7 +147,7 @@ class Instrument:
         sinewave = np.zeros(len(self.ASD))
 
         for i in range(1, len(self.harmonics) + 1):
-            newarray = self.sin(self.harmonics[i], self.note.freq * list(self.harmonics.keys())[i - 1])
+            newarray = self.sin(self.harmonics[i], self.note.freq * (2**(list(self.harmonics.keys())[i - 1])-1))
             sinewave += newarray
         self.sinoid = sinewave
 

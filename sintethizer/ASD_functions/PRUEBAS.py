@@ -57,9 +57,9 @@ def create_func(freq: float, sample_rate: int, duration_note: float): #la funcio
 
 def complete_array(big_array, note: Notes, fs: int, decay_duration): 
     print(f'Big array: {len(big_array)}')
-    print(note.start)
-    print(note.duration)
-    print(note.soundwave)
+    # print(note.start)
+    # print(note.duration)
+    # print(note.soundwave)
         
     big_array[round(note.start * fs): round((note.start) * fs) + len(note.soundwave)] += note.soundwave
         
@@ -97,11 +97,11 @@ if __name__ == "__main__":
 
 
     leido = read_scores('profes_docs/scores/debussy-clair-de-lune.txt')
-    print(leido)
+    # print(leido)
     score_len = len(leido)
     #print(score_len)
     total_len = song_duration(leido)
-    print(total_len)
+    # print(total_len)
     song = complete_array(leido, total_len, score_len, 44100)
 
 
