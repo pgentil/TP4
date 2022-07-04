@@ -28,16 +28,10 @@ class Function():
         return note
 
     def TRI(self, t0, t1, a1, array):
-        index = np.where(array == (array[array < t1][-1]))
-        print(index)
+        # index = np.where(array == (array[array < t1][-1]))      Pepe, para que es esto???
         notes = np.zeros(len(array))
-        notes = np.where(array > t1, notes, array * a1 / t1)
-        notes = np.where(array < t1, notes, ((array/(-t0)) + ((t1/t1-t0)) + a1 -(a1-1)))
-        # for t in range(len(array)):
-        #     if array[t] < t1:
-        #         notes[t] = array[t] * a1 / t1
-        #     elif t > t1:
-        #         notes[t] = (array[t] - t1) / (t1 - t0)
+        notes = np.where(array < t1, notes, array * a1 / t1)
+        notes = np.where(array > t1, notes, (array - t1) / (t1 - t0) + a1)
         return notes
 
     def CONSTANT(self, array):
@@ -70,9 +64,9 @@ class Function():
         note[array > t0] = 0
         return note
 
-    def PULSES(self, t0, t1, a1, array): ##NO FUNCIONA
-        prime_t = (array/ t0) - math.floor(array/t0)
-        note = np.min(abs(((1-a1)/t0)*(prime_t - t0 + t1)) + a1)
+    def PULSES(self, t0, t1, a1, array):
+        prime_t = (array / t0) - np.floor(array / t0)
+        note = np.clip(abs(((1 - a1) / t0) * (prime_t - t0 + t1)) + a1, None, 1)
         return note
 
         
@@ -81,9 +75,9 @@ class Function():
 if __name__ == "__main__":
     function1 = Function()
 
-    result = function1.TRI(0.05, 0.03, 1.3, np.linspace(0,0.05, 100))
+    result = function1.TRI(0.05, 0.03, 1.3, np.linspace(0.05, 0.03, 44100))
     print(result)
-    x = np.linspace(0,0.05, 100)
+    x = np.linspace(0.05, 0.03, 44100)
     plt.plot(x, result)
     plt.show()
 
