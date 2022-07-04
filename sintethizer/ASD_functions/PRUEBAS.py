@@ -7,10 +7,8 @@ Created on Sat Jul  2 18:11:01 2022
 
 import numpy as np
 import matplotlib.pyplot as plt
-import notes
+from profes_docs import notes
 from scipy.io.wavfile import write
-
-from notespoo import Notes
 
 """crear un array grande. Leer la nota y crear una funcion,
 con su respectiva duración y comienzo(otro array).
@@ -20,7 +18,7 @@ por fun_sen en la creacion del archivo"""
 def read_scores(score_archive): #este archivo devuelve lo que dice en escala
     with open(score_archive, 'r') as scr:
         scores = []
-        for i in range(12):
+        for line in scr:
             line = (scr.readline()).rstrip('\n')
             line = line.split(' ')
             scores.append(line)
@@ -35,69 +33,63 @@ def select_freq(read: list, i: int): #la frecuencia de una nota
 
 def create_func(freq: float, sample_rate: int, duration_note: float): #la funcio de la dicha nota 
     t = np.arange(0, duration_note, 1/sample_rate)
-    print(t)
-    freq = freq
-    print(freq)
     one_array = 1 * np.sin(2 * np.pi * freq * t)
     return one_array
 
 
 def complete_array(leido, total_len, score_len, sample_rate): 
-    big_array = np.zeros(int(total_len * sample_rate)) #a esto se le debe agregar las muestras del último decay
+    big_array = np.zeros(int(total_len * sample_rate)+1) #a esto se le debe agregar las muestras del último decay
+    print(f'Big array: {len(big_array)}')
     for n in range(score_len):
         freq = select_freq(leido, n)
-        print(freq)
+        #print(freq)
         func = create_func(freq, sample_rate, float(leido[n][2]))
-        start = float(leido[n][0])
-        print(start)
-        dur = float(leido[n][2])
-        print(dur)
+        start = int(float(leido[n][0]) * sample_rate)
+        #print(start)
+        end = len(func) + start 
+        #print(end)
         
-        big_array[int(start*sample_rate): int((start+dur)*sample_rate)] += func
+        big_array[start:end] += func
         
     return big_array
 
 
-def gen_list_note(scores):
-    list_note = []
-    for i in scores:
-        note = Notes(i)
-        list_note.append(note)
-    return list_note
+leido = read_scores('profes_docs/scores/debussy-clair-de-lune.txt')
+print(leido)
 
+def song_duration(leido):
+    total_len = 0
+    for i in range(len(leido)):
+        duration = float(leido[i][0]) + float(leido[i][2])
+        if duration > total_len:
+            total_len = duration
+    return total_len
 
-leido = read_scores('sintethizer\ASD_functions\escala.txt')
-lista = gen_list_note(leido)
-lista.sort()
-print(lista)
+    
 
-# total_len = float(leido[-1][0]) + float(leido[-1][2])
-# print(total_len)
-# score_len = len(leido)
-# print(score_len)
-# song = complete_array(leido, total_len, score_len, 44100)
-
-
-
+score_len = len(leido)
+#print(score_len)
+total_len = song_duration(leido)
+print(total_len)
+song = complete_array(leido, total_len, score_len, 44100)
 
 
 
+sample_rate = 44100
+def create_song(archive_name, sample_rate, array_song):
+    """
+    Creates a wavefile
+    Parameters
+    ----------
+    archive_name : String
+        The archive's name.
+    sample_rate : Int
+        Generally 44100.
+    array_song : Array
+        Array which contains the functions values.
 
-
-
-
-
-""" ---------------ESTA PARTE CREA EL ARCHIVO DE AUDIO----------------"""
-#armamos una nota 
-# duration_note = 4
-# sample_rate = 44100
-# t = np.arange(0, duration_note, 1/sample_rate)
-# freq = 440
-
-
-# fun_sen = 1 * np.sin(2 * np.pi * freq * t)
-#print(fun_sen)
-
-# write('prueba1.wav', sample_rate, song) #fun_sen es la canción entera
-
-""" -----------------------------------------------------------------"""
+    """
+    write(archive_name, sample_rate, array_song)
+    
+create_song('prueba3.wav', sample_rate, song)
+    
