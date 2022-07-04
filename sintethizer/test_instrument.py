@@ -2,7 +2,7 @@ import unittest
 
 import ASD_functions.instrument as instrument
 
-import ASD_functions.functions as functions
+from functions import Function
 
 import numpy as np
 
@@ -12,7 +12,7 @@ class TestInstruments(unittest.TestCase):
 
     def setUp(self) -> None:
         self.instrument = instrument.Instrument()
-        self.function = functions.Function()
+        self.function = Function()
     
     def test_read_instrument(self):
         self.instrument.read_instrument('sintethizer\ASD_functions\instruments\piano.txt')

@@ -1,3 +1,4 @@
+from unittest import registerResult
 import numpy as np
 import matplotlib.pyplot as plt
 from functions import Function
@@ -5,15 +6,17 @@ from notespoo import Notes
 
 class Instrument:
     
-    def __init__(self, instrument: str, note: Notes):
-        self.instrument = instrument
+    def __init__(self, file: str, note: Notes, fs: int):
+        self.file = file
         self.harmonics = None
         self.functions = []
         self.note = note
         self.ASD = None
-        self.sin = None #sintethizer\ASD_functions\instruments\piano.txt
+        self.sinoid = None #sintethizer\ASD_functions\instruments\piano.txt
+        self.fs = fs
+        self.array = None
 
-    def read_instrument(self, filename: str):
+    def read_instrument(self):
         '''
         Reads the instrument .txt file and saves two different attributes for the Instrument object: harmonics and functions.
         
@@ -24,7 +27,7 @@ class Instrument:
         
         '''
         waves = {}
-        with open(f"instruments/{filename}", 'r') as ins:
+        with open(f"sintethizer\ASD_functions\instruments\{self.file}", 'r') as ins:
             harmonic_quantity = int(ins.readline())
             for i in range(harmonic_quantity):
                 line = ((ins.readline()).rstrip('\n')).split(' ')
@@ -37,7 +40,9 @@ class Instrument:
                     if i > 0:
                         param[i] = float(param[i])
                 self.functions.append(param)
-                
+        self.array = np.linspace(self.note.start, self.note.start + self.note.duration + self.functions[2][1], round(self.fs * (self.note.duration + self.functions[2][1])))
+         
+
     def get_functions(self, param: list, array: np.array) -> np.array:
         '''
         Using a list of parameters (including the name of the function), it executes every function evaluating it with the given array.
@@ -82,7 +87,7 @@ class Instrument:
             raise AssertionError('The given function is non-existent.')
         return myfunction
     
-    def ASD_function(self, iterations: int):
+    def ASD_function(self):
         '''
         Using the "functions" attribute, this function creates the whole "Attack, Sustain, Decay" continuous function.
         The resulting array is assigned to the "ASD" attribute from the Instrument object.
@@ -91,40 +96,50 @@ class Instrument:
         duration = self.note.duration
         duration_attack = (self.functions[0])[1]
         duration_decay = (self.functions[2])[1]
-        array, clean_array = np.linspace(0, duration + duration_decay, iterations), np.linspace(0, duration + duration_decay, iterations)
-        last_sust_index = len(array[array <= duration]) - 1
+        asd = self.array[:]
+        last_sust_index = len(self.array[self.array <= duration]) - 1
         counter = 0
         for stage in self.functions:
             if counter == 0:
-                array = np.where(clean_array > duration_attack, array, self.get_functions(stage, array))
+                asd = np.where(self.array > duration_attack, asd, self.get_functions(stage, asd))
             elif counter == 1:
-                array = np.where(np.logical_or((clean_array <= duration_attack), (clean_array > duration)), array, self.get_functions(stage, array))
+                asd = np.where(np.logical_or((self.array <= duration_attack), (self.array > duration)), asd, self.get_functions(stage, asd))
             elif counter == 2:
-                array = np.where(clean_array <= duration, array, self.get_functions(stage, array - duration) * (array[last_sust_index]))
+                asd = np.where(self.array <= duration, asd, self.get_functions(stage, asd - duration) * (asd[last_sust_index]))
             else:
                 raise ValueError('Counter has reached an unintended value.')
             counter += 1
-        self.ASD = array
+        self.ASD = asd
+        plt.plot(self.array, self.ASD)
+        plt.show()
         
-    def sin(self, array, intensity):
-        start, freq = self.note.start, self.note.freq
-        result = intensity * np.sin(np.pi * freq * (array - start))
+    def sin(self, intensity, freq):
+        start = self.note.start
+        result = intensity * np.sin(np.pi * freq * (self.array - start))
         return result
         
     def sinewave(self):
         sinewave = np.zeros(len(self.ASD))
-        for i in range(1, len(self.harmonics) + 1):
-            newarray = self.sin(self.ASD, self.harmonics[i], self.note.freq * list(self.harmonics.keys())[i - 1], self.note.start)
-            sinewave += newarray
-        self.sin = sinewave
 
-    def get_full_func(self, amplitude):
-        return amplitude * self.ASD * self.sin
+        for i in range(1, len(self.harmonics) + 1):
+            newarray = self.sin(self.harmonics[i], self.note.freq * list(self.harmonics.keys())[i - 1])
+            sinewave += newarray
+        self.sinoid = sinewave
+
+    def full_func(self, amplitude):
+        return amplitude * self.ASD * self.sinoid
+
+    def get_full_func(self):
+        self.read_instrument()
+        self.ASD_function()
+        self.sinewave()
+        return self.full_func(1)
 
 if __name__ == "__main__":
-    nh = [0, 'C8', 0.5]
+    nh = [0, 'A4', 0.5]
     note = Notes(nh)
-    piano = Instrument('Piano', note)
-    piano.read_instrument('piano.txt')
-    piano.ASD_function(44100)
-    
+    parameter = 'piano.txt'
+    piano = Instrument(parameter, note, 44100)
+    array = piano.get_full_func()
+    plt.plot(piano.array, array)
+    plt.show()
