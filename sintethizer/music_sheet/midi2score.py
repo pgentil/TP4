@@ -142,7 +142,7 @@ def main() -> None:
     arg = parser.parse_args()
 
     if arg.tracks is not None:
-        tracks = arg.tracks.replace(" ", "").split(",")
+        tracks = arg.tracks.replace(" ", "").split(",") #int(t) for t in __________________
     else:
         tracks = None
 

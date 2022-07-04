@@ -11,7 +11,7 @@ class Instrument:
         self.functions = []
         self.note = note
         self.ASD = None
-        self.sin = None
+        self.sin = None #sintethizer\ASD_functions\instruments\piano.txt
 
     def read_instrument(self, filename: str):
         '''
