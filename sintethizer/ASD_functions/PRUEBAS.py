@@ -56,7 +56,7 @@ def create_func(freq: float, sample_rate: int, duration_note: float): #la funcio
 #     return big_array
 
 def complete_array(big_array, note: Notes, fs: int, decay_duration): 
-    print(f'Big array: {len(big_array)}')
+    # print(f'Big array: {len(big_array)}')
     # print(note.start)
     # print(note.duration)
     # print(note.soundwave)

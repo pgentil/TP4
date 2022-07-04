@@ -137,19 +137,17 @@ class Instrument:
             counter += 1
         self.ASD = asd
         
-    def sin(self, intensity, freq):
+    def sin(self, intensity, freq, multipliers):
         print(freq)
-        # start = self.note.start
-        result = intensity * np.sin(np.pi * freq * (self.array))
+        result = intensity * np.sin(2 * np.pi * freq * multipliers * (self.array))
         return result
         
     def sinewave(self):
         sinewave = np.zeros(len(self.ASD))
-
-        for i in range(1, len(self.harmonics) + 1):
-            newarray = self.sin(self.harmonics[i], self.note.freq * (2**(list(self.harmonics.keys())[i - 1])-1))
+        for i in list(self.harmonics.keys()):
+            newarray = self.sin(self.harmonics[i], self.note.freq, i)
             sinewave += newarray
-        self.sinoid = sinewave
+        self.sinoid = sinewave 
 
     def full_func(self, amplitude):
         return amplitude * self.ASD * self.sinoid
@@ -163,5 +161,6 @@ if __name__ == "__main__":
     nh = [24, 'A4', 0.1]
     note = Notes(nh)
     parameter = 'piano.txt'
-    piano = Instrument(parameter, note, 44100)
+    piano = Instrument(parameter, 44100)
+    
     array = piano.get_full_func()
