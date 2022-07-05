@@ -13,7 +13,7 @@ import argparse
 
 def main():
     parcer = argparse.ArgumentParser() ##add_argument() ver documentacion
-    parcer.add_argument('-f', '--freq', type=int, help='the frequency of the sample rate') #-h para ver que hace cada cosa
+    parcer.add_argument('-f', '--freq', choices=[8000, 9600, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000] ,type=int, help='the frequency of the sample rate') #-h para ver que hace cada cosa
     parcer.add_argument('-i', '--input', type=str, help='the text file of the instrument\'s configuration')
     parcer.add_argument('-p', '--musicsheet', type=str, help='the text file containing the music sheet')
     parcer.add_argument('-o', '--output', type=str, help='the title of the wave file that is going to be written')
@@ -23,11 +23,17 @@ def main():
     parcer = parcer.parse_args() #procesa argumentos que le pases
     print(parcer.freq, parcer.input, parcer.musicsheet, parcer.output)
 
-
-
+    
+    assert (parcer.input != None), 'No instrument was inputed'
+    assert (parcer.musicsheet != None), 'No music sheet was selected'
+    if parcer.output == None:
+        parcer.output = 'song.wav'
     scores = parcer.musicsheet
     instrument = parcer.input
-    fs = parcer.freq
+    if parcer.freq == None: 
+        fs = 48000
+    else:
+        fs = parcer.freq
 
     piano = Instrument(instrument, fs) 
     decay_duration = piano.functions[2][1]
