@@ -1,7 +1,7 @@
 #Testing python file - pytest
 import unittest
 
-import ASD_functions.functions as functions
+import program.functions as functions
 
 import numpy as np
 

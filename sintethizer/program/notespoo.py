@@ -49,6 +49,10 @@ class Notes():
         """
         self._soundwave = value
 
+    @property
+    def note(self):
+        return self._note
+
     def __eq__(self, other: 'Notes'):
         return self.start == other. start
 
