@@ -6,7 +6,7 @@ import numpy as np
 from scipy.io.wavfile import write
 import matplotlib.pyplot as plt
 
-scores = 'debussy-clair-de-lune.txt'
+scores = 'uptown_funk.txt'
 instrument = 'piano.txt'
 fs = 44100
 
