@@ -1,6 +1,6 @@
 from unittest import registerResult
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from functions import Function
 from notespoo import Notes
 
@@ -16,7 +16,7 @@ class Instrument:
         self.fs = fs
         self.array = None
 
-        with open(f"sintethizer\program\instruments\{self.file}", 'r') as ins:
+        with open(f"instruments\{self.file}", 'r') as ins:
             harmonic_quantity = int(ins.readline())
             for i in range(harmonic_quantity):
                 line = ((ins.readline()).rstrip('\n')).split(' ')
@@ -140,5 +140,5 @@ if __name__ == "__main__":
     piano.set_note(note)
     array = piano.get_full_func()
     clean_array = np.arange(0, note.duration+(piano.functions[2])[1], 1/441000)
-    plt.plot(clean_array, array)
-    plt.show()
+    # plt.plot(clean_array, array)
+    # plt.show()

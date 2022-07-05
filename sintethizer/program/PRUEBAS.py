@@ -18,7 +18,7 @@ Sumar esos arrays chicos al grande. El array grande reemplazarlo
 por fun_sen en la creacion del archivo"""
 
 def read_scores(score_archive): #este archivo devuelve lo que dice en escala
-    with open(f'sintethizer\program\scores\{score_archive}', 'r') as scr:
+    with open(f'scores\{score_archive}', 'r') as scr:
         scores = []
         for line in scr:
             line = line.split(' ')
