@@ -128,7 +128,7 @@ class Instrument:
     def get_full_func(self):
         self.ASD_function()
         self.sinewave()
-        return self.full_func(0.005)
+        return self.full_func(0.07)
 
 if __name__ == "__main__":
     nh = [24, 'A4', 0.1]
