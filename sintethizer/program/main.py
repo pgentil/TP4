@@ -6,7 +6,7 @@ import numpy as np
 from scipy.io.wavfile import write
 import matplotlib.pyplot as plt
 
-scores = 'queen.txt'
+scores = 'debussy-clair-de-lune.txt'
 instrument = 'piano.txt'
 fs = 44100
 
@@ -15,7 +15,7 @@ decay_duration = piano.functions[2][1]
 
 SCORES = PRUEBAS.read_scores(scores) #lista de lista con c renglon de la partitura
 song_duration = PRUEBAS.song_duration(SCORES)  #devuelve la dur de la cancion en segundos
-track = np.zeros(round((song_duration + decay_duration)*fs) + 1) #array de ceros a completar
+track = np.zeros(round((song_duration + decay_duration)*fs) + 1 * fs) #array de ceros a completar
 
 for i in SCORES:
     # print(i)
@@ -34,3 +34,8 @@ write("lol.wav", fs, data.astype(np.int16))
 
 
 
+#.5 Bb4 .5
+# 1 B4 .5
+# 1.5 C4 .5
+# 2 Db4 .5
+# 2.5 D4 .5

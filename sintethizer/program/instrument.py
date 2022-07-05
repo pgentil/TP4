@@ -16,7 +16,7 @@ class Instrument:
         self.fs = fs
         self.array = None
 
-        with open(f"sintethizer\ASD_functions\instruments\{self.file}", 'r') as ins:
+        with open(f"sintethizer\program\instruments\{self.file}", 'r') as ins:
             harmonic_quantity = int(ins.readline())
             for i in range(harmonic_quantity):
                 line = ((ins.readline()).rstrip('\n')).split(' ')
@@ -98,17 +98,19 @@ class Instrument:
         duration_decay = (self.functions[2])[1]
         asd = self.array[:]
         last_sust_index = len(self.array[self.array <= duration]) - 1
-        counter = 0
-        for stage in self.functions:
-            if counter == 0:
-                asd = np.where(self.array > duration_attack, asd, self.get_functions(stage, asd))
-            elif counter == 1:
-                asd = np.where(np.logical_or((self.array <= duration_attack), (self.array > duration)), asd, self.get_functions(stage, asd))
-            elif counter == 2:
-                asd = np.where(self.array <= duration, asd, self.get_functions(stage, asd - duration) * (asd[last_sust_index]))
-            else:
-                raise ValueError('Counter has reached an unintended value.')
-            counter += 1
+        # counter = 0
+        asd = np.where(self.array < duration_attack, self.get_functions(self.functions[0], asd), np.where(self.array < duration, self.get_functions(self.functions[1], asd), self.get_functions(self.functions[2], asd- duration))) #* (asd[last_sust_index]))
+
+        # for stage in self.functions:
+        #     if counter == 0:
+        #         asd = np.where(self.array > duration_attack, asd, self.get_functions(stage, asd))
+        #     elif counter == 1:
+        #         asd = np.where(np.logical_or((self.array <= duration_attack), (self.array > duration)), asd, self.get_functions(stage, asd))
+        #     elif counter == 2:
+        #         asd = np.where(self.array <= duration, asd, self.get_functions(stage, asd - duration) * (asd[last_sust_index]))
+        #     else:
+        #         raise ValueError('Counter has reached an unintended value.')
+        #     counter += 1
         self.ASD = asd
         
     def sin(self, intensity, freq, multipliers):
