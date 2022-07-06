@@ -1,7 +1,7 @@
 
 from instrument import Instrument
 from notespoo import Notes
-import PRUEBAS
+import synth
 
 
 import numpy as np
@@ -38,8 +38,8 @@ def main():
     piano = Instrument(instrument, fs) 
     decay_duration = piano.functions[2][1]
 
-    SCORES = PRUEBAS.read_scores(scores) #lista de lista con c renglon de la partitura
-    song_duration = PRUEBAS.song_duration(SCORES)  #devuelve la dur de la cancion en segundos
+    SCORES = synth.read_scores(scores) #lista de lista con c renglon de la partitura
+    song_duration = synth.song_duration(SCORES)  #devuelve la dur de la cancion en segundos
     print(fs)
     track = np.zeros(round((song_duration + decay_duration)*fs) + fs) #array de ceros a completar
 
@@ -50,7 +50,7 @@ def main():
         piano.set_note(note)
         # print(f'nota: {note}')  #F4
         note.soundwave = piano.get_full_func() #devuelve la senial de la nota con asd y armonicos incluidos
-        track = PRUEBAS.complete_array(track ,note, fs, decay_duration)
+        track = synth.complete_array(track ,note, fs, decay_duration)
         
     assert np.max(abs(track)) != 0, "The music sheet you've chosen is empty"
     data = 2**15/ np.max(abs(track)) * track
