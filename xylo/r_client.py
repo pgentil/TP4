@@ -5,7 +5,7 @@ from xylophone.client import XyloClient
 from xylophone.xylo import XyloNote
 import argparse
 
-
+ACCEPTED_NOTES = ['G4, Gs4', 'A4', 'As4', 'Ab4', 'B4', 'Bb4', 'C5', 'Cs5', 'D5', 'Ds5', 'Db5', 'E5', 'Eb5', 'F5', 'G5', 'A5', 'As5', 'Ab5', 'B5', 'Bb5', 'C6', 'Cs6', 'D6', 'Ds6', 'Db6', 'E6', 'Eb6', 'F6', 'Fs6', 'G6', 'Gs6', 'Gb6', 'A6', 'As6', 'Ab6', 'B6', 'Bb6', 'C7', 'Cs7', 'Cb7']
 
 def xylo_read_scores(score_archive):
     '''
@@ -15,7 +15,7 @@ def xylo_read_scores(score_archive):
     ---
     score_archive || str. The name of the .txt file containing the song's scores.
     '''
-    with open(f'{score_archive}', 'r') as scr:
+    with open(f'xylo_scores\{score_archive}', 'r') as scr:
         scores = []
         for line in scr:
                 line = line.split(' ')
@@ -37,8 +37,7 @@ def xylonotes(note:list):
     ---
     notes || list. A list containing N amount of notes, which are strings.
     '''
-    accepted_notes = ['G4, Gs4', 'A4', 'As4', 'Ab4', 'B4', 'Bb4', 'C5', 'Cs5', 'D5', 'Ds5', 'Db5', 'E5', 'Eb5', 'F5', 'G5', 'A5', 'As5', 'Ab5', 'B5', 'Bb5', 'C6', 'Cs6', 'D6', 'Ds6', 'Db6', 'E6', 'Eb6', 'F6', 'Fs6', 'G6', 'Gs6', 'Gb6', 'A6', 'As6', 'Ab6', 'B6', 'Bb6', 'C7', 'Cs7', 'Cb7']
-    return note[1] in accepted_notes
+    return note[1] in ACCEPTED_NOTES
 
 def note_velocity(note: list, velocity=90):
     '''

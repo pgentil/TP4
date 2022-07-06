@@ -8,7 +8,7 @@ if __name__ == "__main__":
         name='synthesizer',
         version='1.0.0',
         license='MIT',
-        authors='Mateo Lopez Vilaclara, Fausto Pettinari, Pedro Santiago Gentil',
+        authors='Mateo López Vilaclara, Fausto Julián Pettinari, Pedro Santiago Gentil',
         authors_mails='mlopezvilaclara@udesa.edu.ar, fpettinari@udesa.edu.ar, pgentil@udesa.edu.ar',
         packages= find_packages(
             where='.',
