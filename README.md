@@ -3,6 +3,18 @@
 <h2 align="center">Participants: Mateo López Vilaclara, Fausto Julián Pettinari and Pedro Santiago Gentil</h2>
 
 ![UDESA LOGO](https://user-images.githubusercontent.com/101142182/177570532-6c64a0f6-4c89-4ffd-a214-95629d620ab9.png)
+
+## Installing the package
+To install the package first you must clone the repository locally. Then in the terminal, from the TP4 directory you must run this commands below
+
+```
+pip install -r requierements.txt
+```
+
+```
+pip install .
+```
+
 ## Uses Synthesizer
 In the repository there are 3 instruments as example to use in the synthesizer in the directory 'synthesizer\instruments'.
 To use the module synthesizer one must first have their music sheet and instrument ready in their own repo. The following code will show how to use the synthesizer. The first thing to do is to create a file.py to run in your console:
