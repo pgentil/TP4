@@ -53,13 +53,14 @@ def note_velocity(note: list, velocity=90):
 
 def xylo_object(note: list):
     '''
-    
+    Receives the ordered note list and generates a XyloNote object with its elements.
+    Returns said object.
+    ---
+    note || list. An ordered list containing three elements, in order: note, start, velocity.
     
     '''
     object = XyloNote(note[0], note[1], note[2])
     return object
-
-
 
 
 def main():
