@@ -48,16 +48,16 @@ def note_velocity(note: list, velocity=90):
     note || list. A list containing the notes. It is supposed to be used right after being filtered by the xylonotes method.
     velocity || numeric. The velocity with which the hammers will hit the tile. The default value is 90.
     '''
-        note.append(velocity)
-        return note
+    note.append(velocity)
+    return note
 
 def xylo_object(note: list):
     '''
     
     
     '''
-        object = XyloNote(note[0], note[1], note[2])
-        return object
+    object = XyloNote(note[0], note[1], note[2])
+    return object
 
 
 
