@@ -145,7 +145,7 @@ class Instrument:
     def sinewave(self):
         """
         This method carries the task of adding the different armonics of the note in a single array which 
-        whill result in the final sinoid soundwave of the note. Returns None.
+        will result in the final sinoid soundwave of the note. Returns None; instead, it creates a "sinoid" attribute.
         """
         sinewave = np.zeros(len(self.ASD))
         for i in list(self.harmonics.keys()):
@@ -169,9 +169,9 @@ class Instrument:
     def get_full_func(self):
         """
         This method calls all methods needed to create the final soundwave of a note.
-        Retruns the final soundwave of the note. 
+        Returns the final soundwave of the note. 
 
-        Warning: The self.note atributte must not be None. It must contain a Notes object from the
+        Warning: The self.note atribute must not be None. It must contain a Notes object from the
         notespoo module.
 
         """
