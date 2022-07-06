@@ -1,23 +1,16 @@
-import unittest
-
-import ASD_functions.instrument as instrument
-
+import instrument as instrument
 from functions import Function
 
 import numpy as np
-
 import matplotlib.pyplot as plt
+import unittest
 
 class TestInstruments(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.instrument = instrument.Instrument()
+        self.instrument = instrument.Instrument('ejemplo.txt', 1)
         self.function = Function()
     
-    def test_read_instrument(self):
-        self.instrument.read_instrument('sintethizer\ASD_functions\instruments\piano.txt')
-        self.assertTrue(len(self.instrument.harmonics)==4 and len(self.instrument.functions)==3)
-
     def test_get_functions(self):
         param = ['TRI', '0.05', '0.03', '1.3']
         array = np.array([1,2,3,4,5])
