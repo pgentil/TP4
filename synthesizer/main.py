@@ -21,7 +21,6 @@ def main():
 
 
     parcer = parcer.parse_args() #procesa argumentos que le pases
-    print(parcer.freq, parcer.input, parcer.musicsheet, parcer.output)
 
     
     assert (parcer.input != None), 'No instrument was inputed'
@@ -40,7 +39,6 @@ def main():
 
     SCORES = synth.read_scores(scores) #lista de lista con c renglon de la partitura
     song_duration = synth.song_duration(SCORES)  #devuelve la dur de la cancion en segundos
-    print(fs)
     track = np.zeros(round((song_duration + decay_duration)*fs) + fs) #array de ceros a completar
 
     for i in SCORES:
