@@ -1,4 +1,6 @@
-<h1 align="center"> TP4 </h1>
+<h1 align="center"> Final TP </h1>
+<h2 align="center"> 'Pensamiento Computacional' </h2>
+<h2 align="center">Participantes: Mateo López Vilaclara, Fausto Julián Pettinari and Pedro Santiago Gentil</h2>
 
 ![UDESA LOGO](https://user-images.githubusercontent.com/101142182/177570532-6c64a0f6-4c89-4ffd-a214-95629d620ab9.png)
 ## Uses
