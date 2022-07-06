@@ -1,6 +1,6 @@
-import instrument as instrument
-from functions import Function
-from notespoo import Notes
+from synthesizer.instrument import Instrument
+from synthesizer.functions import Function
+from synthesizer.notespoo import Notes
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +9,7 @@ import unittest
 class TestInstruments(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.instrument = instrument.Instrument('ejemplo.txt', 1)
+        self.instrument = Instrument('ejemplo.txt', 1)
         self.function = Function()
         self.array = np.array([1,2,3,4,5])
         self.note = Notes([0, 'A0', 6])

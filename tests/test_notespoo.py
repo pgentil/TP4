@@ -1,5 +1,5 @@
-from notespoo import Notes
-from notes import notes_mapping
+from synthesizer.notespoo import Notes
+from synthesizer.notes import notes_mapping
 
 import unittest
 import numpy as np

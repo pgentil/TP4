@@ -6,11 +6,9 @@ Created on Sat Jul  2 18:11:01 2022
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
-import notes
 from scipy.io.wavfile import write
 
-from notespoo import Notes
+from synthesizer.notespoo import Notes
 
 """crear un array grande. Leer la nota y crear una funcion,
 con su respectiva duración y comienzo(otro array).

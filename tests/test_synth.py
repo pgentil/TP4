@@ -1,5 +1,5 @@
-import synth
-from notespoo import Notes
+import synthesizer.synth as synth
+from synthesizer.notespoo import Notes
 
 
 import unittest

@@ -1,7 +1,7 @@
 
-from instrument import Instrument
-from notespoo import Notes
-import synth
+from synthesizer.instrument import Instrument
+from synthesizer.notespoo import Notes
+import synthesizer.synth as synth
 
 
 import numpy as np

@@ -1,7 +1,7 @@
 #Testing python file - pytest
 import unittest
 
-import program.functions as functions
+import synthesizer.functions as functions
 
 import numpy as np
 

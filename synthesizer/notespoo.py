@@ -1,5 +1,5 @@
 
-import notes
+import synthesizer.notes as notes
 import numpy as np
 
 

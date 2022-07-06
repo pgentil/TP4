@@ -15,7 +15,7 @@ def xylo_read_scores(score_archive):
     ---
     score_archive || str. The name of the .txt file containing the song's scores.
     '''
-    with open(f'xylo_scores\{score_archive}', 'r') as scr:
+    with open(f'{score_archive}', 'r') as scr:
         scores = []
         for line in scr:
                 line = line.split(' ')

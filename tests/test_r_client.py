@@ -1,7 +1,6 @@
 
-import r_client
+import xylo.r_client as r_client
 
-from xylophone.client import XyloClient
 from xylophone.xylo import XyloNote
 import unittest
 

@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-from functions import Function
-from notespoo import Notes
+from synthesizer.functions import Function
+from synthesizer.notespoo import Notes
 
 class Instrument:
     
@@ -22,11 +22,11 @@ class Instrument:
         self.functions = []
         self.note = None
         self.ASD = None
-        self.sinoid = None #sintethizer\ASD_functions\instruments\piano.txt
+        self.sinoid = None 
         self.fs = fs
         self.array = None
 
-        with open(f"instruments\{self.file}", 'r') as ins:
+        with open(f"{self.file}", 'r') as ins:
             harmonic_quantity = int(ins.readline())
             for i in range(harmonic_quantity):
                 line = ((ins.readline()).rstrip('\n')).split(' ')
