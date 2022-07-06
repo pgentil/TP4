@@ -9,7 +9,7 @@ import unittest
 class TestInstruments(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.instrument = Instrument('ejemplo.txt', 1)
+        self.instrument = Instrument('synthesizer/instruments/ejemplo.txt', 1) #You must be standing in the TP4 directory with the whole repository downloaded
         self.function = Function()
         self.array = np.array([1,2,3,4,5])
         self.note = Notes([0, 'A0', 6])

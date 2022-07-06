@@ -23,7 +23,7 @@ def read_scores(score_archive):
     ---
     score_archive || str. Name of the .txt file containing the song's scores, each line having its own start, note, and duration.
     '''
-    with open(f'scores\{score_archive}', 'r') as scr:
+    with open(f'{score_archive}', 'r') as scr:
         scores = []
         for line in scr:
             line = line.split(' ')
