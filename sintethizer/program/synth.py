@@ -17,7 +17,14 @@ con su respectiva duración y comienzo(otro array).
 Sumar esos arrays chicos al grande. El array grande reemplazarlo
 por fun_sen en la creacion del archivo"""
 
-def read_scores(score_archive): #este archivo devuelve lo que dice en escala
+def read_scores(score_archive):
+    '''
+    Reads a song's scores written as a .txt file, line by line. Each line is split into a list of three elements, these being (in order): [start, note, duration].
+    Appends each of these lists into a bigger one, called "scores".
+    Returns the "scores" list once the program has finished iterating the .txt file lines.
+    ---
+    score_archive || str. Name of the .txt file containing the song's scores, each line having its own start, note, and duration.
+    '''
     with open(f'scores\{score_archive}', 'r') as scr:
         scores = []
         for line in scr:
@@ -27,6 +34,14 @@ def read_scores(score_archive): #este archivo devuelve lo que dice en escala
 
 
 def select_freq(read: list, i: int): #la frecuencia de una nota
+    '''
+    Selects a specific note's frequency by iterating over the notes_mapping list in the notes.py module and comparing it with the second element in the "read"
+    list of lists. If both elements are the same, the function returns its corresponding frequence.
+    ---
+    read || list of lists. The bigger list can have an indefinite length, but each smaller list is supposed to have a length of 3, as it is supposed to be used
+    with what has been returned by the read_scores function.
+    i || int. This integer indicates which of the smaller lists contained in the "read" argument is going to be used.
+    '''
     for n in range(len(notes.notes_mapping)):
         if notes.notes_mapping[n][0] == read[i][1]:
             return notes.notes_mapping[n][1]
