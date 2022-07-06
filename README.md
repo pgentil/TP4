@@ -61,7 +61,7 @@ if __name__ == "__main__":
 python file.py -i (histip) -p (port) -s (music_sheet.txt)
 ```
 <p>This code will make you connect with the server making the xylophone play. The hostip of the xylophone is 10.42.0.1 and the port is 8080. </p>
-<p>The requirements for the xylophone to play is to have the package xylophone already installed. To do so please see [documentation](https://github.com/udesa-ai/xylophone)</p>
+The requirements for the xylophone to play is to have the package xylophone already installed. To do so please see [documentation](https://github.com/udesa-ai/xylophone)
 
 
 
