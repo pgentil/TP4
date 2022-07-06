@@ -50,7 +50,7 @@ def main():
         piano.set_note(note)
         # print(f'nota: {note}')  #F4
         note.soundwave = piano.get_full_func() #devuelve la senial de la nota con asd y armonicos incluidos
-        track = synth.complete_array(track ,note, fs, decay_duration)
+        track = synth.complete_array(track ,note, fs)
         
     assert np.max(abs(track)) != 0, "The music sheet you've chosen is empty"
     data = 2**15/ np.max(abs(track)) * track

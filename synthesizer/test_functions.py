@@ -46,12 +46,10 @@ class TestFunctions(unittest.TestCase):
 
     def test_TRI(self):
         pass
-        # array = np.arange(0, 6, 1.)
-        # result = self.function.TRI(1, 3, 2, array)
-        # plt.plot(array, result)
-        # plt.show
-        # expected = np.array([0])
-        # self.assertTrue(np.allclose(result, expected))
+        array = np.arange(0, 6, 1.)
+        result = self.function.TRI(1, 3, 2, array)
+        expected = np.array([0, 2/3, 4/3, 2, 1, 0])
+        self.assertTrue(np.allclose(result, expected))
 
     def test_CONSTANT(self):
         array = np.arange(0, 6, 1.)
@@ -96,11 +94,11 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(np.allclose(result, expected))
 
     def test_PULSES(self):
-        pass
-        # array = np.arange(0, 6, 1)
-        # result = self.function.PULSES(1, array)
-        # expected = np.array([ 1, np.log10(5.5), 0, 0, 0])
-        # self.assertTrue(np.allclose(result, expected))
+        array = np.arange(0, 6, 1)
+        prime_t = (array) - np.floor(array)
+        result = self.function.PULSES(1, 3, 5, array)
+        expected = np.clip(abs((-4) * (prime_t + 2)) + 5, None, 1)
+        self.assertTrue(np.allclose(result, expected))
 
     def tearDown(self) -> None:
         del self.function

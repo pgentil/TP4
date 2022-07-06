@@ -30,8 +30,8 @@ class Function():
     def TRI(self, t0, t1, a1, array):
         # index = np.where(array == (array[array < t1][-1]))      Pepe, para que es esto???
         notes = np.zeros(len(array))
-        notes = np.where(array < t1, notes, array * a1 / t1)
-        notes = np.where(array > t1, notes, (array - t1) / (t1 - t0) + a1)
+        notes = np.where(array < t1, array * a1 / t1, (array - t1) / (-t0) + a1 )
+        # notes = np.where(array < t1, notes, (array - t1) / (t1 - t0) + a1)
         return notes
 
     def CONSTANT(self, array):

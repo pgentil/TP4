@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 from functions import Function
@@ -125,6 +126,8 @@ class Instrument:
         last_sust_index = len(self.array[self.array <= duration]) - 1
         asd = np.where(self.array < duration_attack, self.get_functions(self.functions[0], asd), np.where(self.array < duration, self.get_functions(self.functions[1], asd), self.get_functions(self.functions[2], asd- duration)))
         self.ASD = asd
+        # plt.plot(self.array, self.ASD)
+        # plt.show()
         
     def sin(self, intensity: float, freq: float, multiplier: int) -> np.array:
         """
