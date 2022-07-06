@@ -68,8 +68,9 @@ class Notes():
 
 
 if __name__ == "__main__":
-    param = ['0', 'C8', '0.5']
-    param2 = ['0', 'R4', '0.5']
-    note1 = Notes(param)
+    pass
+    # param = ['0', 'C8', '0.5']
+    #param2 = ['0', 'R4', '0.5']
+    #note1 = Notes(param)
     # note2 = Notes(param2)
-    print(note1.freq)
+    # print(note1.freq)
