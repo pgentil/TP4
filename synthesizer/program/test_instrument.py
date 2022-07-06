@@ -12,7 +12,7 @@ class TestInstruments(unittest.TestCase):
         self.instrument = instrument.Instrument('ejemplo.txt', 1)
         self.function = Function()
         self.array = np.array([1,2,3,4,5])
-        self.note = Notes([0, 'A0', 0.5])
+        self.note = Notes([0, 'A0', 6])
     
     def test_get_functions(self):
         param = ['TRI', 0.05, 0.03, 1.3]
@@ -33,16 +33,30 @@ class TestInstruments(unittest.TestCase):
         pass
 
     def test_sin(self):
-        pass
+        self.instrument.set_note(self.note)
+        sinoid = 0.5 * np.sin(2 * np.pi * self.note.freq * 4)
+        result = self.instrument.sin(0.5, self.instrument.note.freq, 4)
+        self.assertTrue(np.allclose(sinoid, result))
 
     def test_sinewave(self):
-        pass
+        self.instrument.set_note(self.note)
+        self.instrument.ASD_function()
+        self.instrument.sinewave()
+        self.assertEqual(self.instrument.sinoid[0], 0)
 
     def test_full_func(self):
-        pass
+        self.instrument.set_note(self.note)
+        self.instrument.ASD_function()
+        self.instrument.sinewave()
+        self.assertTrue(np.allclose(self.instrument.ASD*self.instrument.sinoid, self.instrument.full_func()))
 
     def test_get_full_func(self):
-        pass
+        self.instrument.set_note(self.note)
+        self.instrument.ASD_function()
+        self.instrument.sinewave()
+        expected = self.instrument.full_func(0.07)
+        result = self.instrument.get_full_func()
+        self.assertTrue(np.allclose(expected, result))
 
     def tearDown(self) -> None:
         del self.instrument

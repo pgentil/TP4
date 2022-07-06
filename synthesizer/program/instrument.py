@@ -156,7 +156,7 @@ class Instrument:
             sinewave += newarray
         self.sinoid = sinewave 
 
-    def full_func(self, amplitude: float) -> np.array:
+    def full_func(self, amplitude: float =1) -> np.array:
         """
         This method carries out the product to generate the final soundwave. It multiplies the final sinoid wave
         with the attack-sustain-decay and an amplitude. It returns a numpy array containing the values that will be modeling the note
@@ -164,7 +164,7 @@ class Instrument:
         
         ---
 
-        amplitude || A float that will escalate the final sounwave's amplitude.
+        amplitude || A float that will escalate the final sounwave's amplitude. Default value = 1.
 
         """
         return amplitude * self.ASD * self.sinoid

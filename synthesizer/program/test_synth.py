@@ -6,9 +6,6 @@ import unittest
 import numpy as np
 
 
-
-
-
 class TestsynthFunctions(unittest.TestCase):
 
     def setUp(self) -> None:
@@ -35,7 +32,6 @@ class TestsynthFunctions(unittest.TestCase):
         result = synth.complete_array(self.array, self.note, fs)
         print(result)
         self.assertTrue(np.allclose(expected, result))
-
 
     
     def tearDown(self) -> None:
