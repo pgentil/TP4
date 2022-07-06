@@ -73,13 +73,14 @@ class Function():
 
 
 if __name__ == "__main__":
-    function1 = Function()
+    pass
+    # function1 = Function()
 
-    result = function1.TRI(0.05, 0.03, 1.3, np.linspace(0.05, 0.03, 44100))
-    print(result)
-    x = np.linspace(0.05, 0.03, 44100)
-    plt.plot(x, result)
-    plt.show()
+    # result = function1.TRI(0.05, 0.03, 1.3, np.linspace(0.05, 0.03, 44100))
+    # print(result)
+    # x = np.linspace(0.05, 0.03, 44100)
+    # plt.plot(x, result)
+    # plt.show()
 
     # def liner(array, t0):
     #     result = array  * (1/t0)
