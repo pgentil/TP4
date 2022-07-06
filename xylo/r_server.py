@@ -8,6 +8,6 @@ if __name__ == '__main__':
     xylophone.
     This starts a TCP server that will listen for messages sent with the XyloClient
     """
-    server = XyloServer(host='localhost', port=8080)
+    server = XyloServer(host='10.42.0.1', port=8080)
     server.start()
 

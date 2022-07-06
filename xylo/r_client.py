@@ -11,7 +11,6 @@ def xylo_read_scores(score_archive): #este archivo devuelve lo que dice en escal
     with open(f'{score_archive}', 'r') as scr:
         scores = []
         for line in scr:
-                print(line)
                 line = line.split(' ')
                 if xylonotes(line) and len(line) != 0:
                         line[1], line[0] = line[0], line[1]
@@ -34,7 +33,6 @@ def note_velocity(note: list, velocity=90):
         return note
 
 def xylo_object(note: list):
-        print(type(note[1]))
         object = XyloNote(note[0], note[1], note[2])
         return object
 
@@ -42,17 +40,18 @@ def xylo_object(note: list):
 
 
 def main():
-        # parcer = argparse.ArgumentParser()
-        # parcer.add_argument('-h', '--host', type=str, help='IP of the host')
+        parcer = argparse.ArgumentParser()
+        parcer.add_argument('-i', '--hostip', type=str, help='IP of the host. DEFAULT = \'localhost\'', default='localhost')
+        parcer.add_argument('-p', '--port', type=int, help='Port of the server. DEFAULT = 8080', default=8080)
+        parcer.add_argument('-s', '--song', type=str, help='The music sheet of the song you want to play.')
 
-        # parcer = parcer.parse_args()
-        # print(parcer.host)
 
-        score = 'sintethizer/program/scores/wii.txt'
+        parcer = parcer.parse_args()
+
+        score = parcer.song
         notes = xylo_read_scores(score)
-        print(notes)
 
-        client = XyloClient(host='localhost', port=8080)
+        client = XyloClient(host=parcer.hostip, port=parcer.port)
         client.load(notes)
         client.play()
 
