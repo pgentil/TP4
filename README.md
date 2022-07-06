@@ -1,9 +1,9 @@
 <h1 align="center"> Final TP </h1>
 <h2 align="center"> 'Pensamiento Computacional' </h2>
-<h2 align="center">Participantes: Mateo López Vilaclara, Fausto Julián Pettinari and Pedro Santiago Gentil</h2>
+<h2 align="center">Participants: Mateo López Vilaclara, Fausto Julián Pettinari and Pedro Santiago Gentil</h2>
 
 ![UDESA LOGO](https://user-images.githubusercontent.com/101142182/177570532-6c64a0f6-4c89-4ffd-a214-95629d620ab9.png)
-## Uses
+## Uses Synthesizer
 In the repository there are 3 instruments as example to use in the synthesizer in the directory 'synthesizer\instruments'.
 To use the module synthesizer one must first have their music sheet and instrument ready in their own repo. The following code will show how to use the synthesizer. The first thing to do is to create a file.py to run in your console:
 
@@ -46,6 +46,22 @@ INVLINEAR .02
 
 
 The first number in *music_sheet.txt* refers to the starting time of the note, the second paramter is the note, and the second number in the right side of the note is its duration.
+
+## Uses Xylophone
+This is a module used to play a real xylophone. 
+To run this module you must do something similar to the synthesizer:
+
+```
+import xylo.r_client
+
+if __name__ == "__main__":
+    xylo.r_client.main()
+```
+```
+python file.py -i (histip) -p (port) -s (music_sheet.txt)
+```
+<p>This code will make you connect with the server making the xylophone play. The hostip of the xylophone is 10.42.0.1 and the port is 8080. </p>
+<p>The requirements for the xylophone to play is to have the package xylophone already installed. To do so please see [documentation](https://github.com/udesa-ai/xylophone)</p>
 
 
 
